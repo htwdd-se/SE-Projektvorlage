@@ -8,6 +8,30 @@ include::../_includes/default-attributes.inc.adoc[]
 == Einführung
 In diesem Dokument werden die Benutzeroberflächen des Systems {project-system-name} beschrieben. Dies können sein:
 
+* Personas der wichtigsten Stakeholder
+* Nutzerkontext
 * Wireframes relevanter Benutzeroberflächen
 * Zusammenhänge mittels Taskflow-Diagrammen
 * Angaben über die Gestaltung der Benutzeroberfläche, z.B. Styling, Bedienbarkeit, ...
+
+== Personas
+// Fügen Sie hier als Tabelle oder Bild die Persons der wichtigsten Stakeholder ein
+
+== Nutzungskontext
+// Beschreiben Sie die Arbeitsaufgaben, Arbeitsmittel, physische und soziale Umgebung, in der das Produkt genutzt wird. 
+// Eventuell sind Angaben zu Fehlerquellen, Häufigkeiten von Ereignisse sowie Bearbeitungsdauern von Vorgängen relevant
+
+//Hier sind einige Anregungen:
+
+//Zutreffendes angeben, nicht zutreffendes streichen oder auskommentieren
+. Anzahl der Personen, die an der Erfüllung der Aufgabe beteiligt sind. Ändert sich das?
+. Wie lange dauert die Bearbeitung der Aufgabe? Wie viel Zeit wird für jeden Arbeitsschritt benötigt? Ändert sich das?
+. Gibt es besondere Umgebungsbedingungen, z.B. mobil, offline, Außeneinsatz, Touchbedienung, Nutzung durch seh- oder hörbeeinträchtigte Personen?
+. Welche Systemplattformen werden heute eingesetzt? Welche sind es ggf. zukünftig?
+. Welche anderen Anwendungen sind im Einsatz? Muss ihre Anwendung mit diesen integriert werden?
+
+Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigramme, IT-Landschaft, ...) eingefügt werden, um die beteiligten Aufgaben und Rollen zu skizzieren.
+
+== Wireframes und Wireflow
+// Fügen Sie Wireframes als Bilder oder als Link (z.B. zu einem Miroboard) ein
+// Beziehen Sie ihre Wireframes auf konkrete User Stories oder Epics.

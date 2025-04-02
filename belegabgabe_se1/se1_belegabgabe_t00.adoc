@@ -50,22 +50,18 @@ include::{docs-project-management}/project_plan.adoc[lines=1..1;4..-1,leveloffse
 
 // --- Technische Spezifikation ---
 = Technische Spezifikation
-* Vision
-* Glossar
-* Domänenmodel
+* Produktvision
+* Glossar und Domänenmodel
 * UX-Konzept
 
 :imagesdir: {docs-requirements}/images
 
-// Vision
+// Produktvision
 include::{docs-requirements}/vision.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
-// Glossar
+// Glossar und Domänenmodell
 [#glossary]
 include::{docs-requirements}/glossary.adoc[lines=1..1;4..-1,leveloffset=+1]
-<<<
-// Domänenmodell
-include::{docs-requirements}/domain_model.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
 // UX-Konzept
 include::{docs-requirements}/ux-concept.adoc[lines=1..1;4..-1,leveloffset=+1]

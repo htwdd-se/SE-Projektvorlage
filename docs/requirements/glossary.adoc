@@ -42,3 +42,6 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | xx
 | xx
 |===
+
+== Domänenmodell
+// Fügen Sie hier eine Abbildung mit ihrem Domänenmodell ein

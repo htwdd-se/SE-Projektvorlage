@@ -1,11 +1,11 @@
-# Vorlage Projektstruktur & OpenUP-Templates
+# Vorlage Projektstruktur & Dokumente
 
 Das Repository enthält die Vorlage einer Projektstruktur und Template-Dokumente
 im AsciiDoc-Format. Dies wird für die Bearbeitung der Belegarbeit in Software
-Engineering I und II benötigt. Im Detail wären dies:
+Engineering I und II benötigt. Im Detail sind das:
 
-- Projektstruktur anhand der Work Products im OpenUP
-- Templates der benötigten OpenUP-Dokumente (AsciiDoc-Format)
+- Projektstruktur anhand
+- Templates der benötigten Dokumente (AsciiDoc-Format)
 - Vorlage für die Belegabgabe in SE I (AsciiDoc-Format)
 
 > [!NOTE]
@@ -36,45 +36,23 @@ docs
 │   └── design.adoc
 ├── environment
 ├── project_management
-│   ├── iteration_plan_01.adoc
-│   ├── project_plan.adoc
-│   ├── risk_list.adoc
-│   └── risks.csv
+│   └── project_plan.adoc
 ├── requirements
-│   ├── domain_model.adoc
 │   ├── glossary.adoc
-│   ├── system-wide_requirements.adoc
-│   ├── use-case_model.adoc
-│   ├── use_case_01.inc.adoc
-│   ├── use_case_02.inc.adoc
 │   ├── ux-concept.adoc
 │   └── vision.adoc
 └── test
     └── test_cases.adoc
 ```
 
-## Unified Process - Templates
+## Dokumenten-Templates
 
-Dieses Repository enthält Vorlagen im AsciiDoc-Format für die Arbeit mit dem
-Open Unified Process. Die Vorlagen basieren auf den Templates der offiziellen
-OpenUP Dokumentation in der Version 1.5x aus dem Eclipse Process Framework
-(EPF) und wurden bis auf geringe inhaltliche / strukturelle Anpassungen
-lediglich auf deutsch übersetzt.
+Dieses Repository enthält Vorlagen im AsciiDoc-Format zur Dokumentation der verschiedenen Arbeitsergebnisse. Sie sind vereinfachte Varianten der Vorlagen aus dem Open Unified Process, Version 1.5.
 
-### Hinweise
+### Hinweis
 
-- Im Unified Process gibt es eine "Supplementary Specification", die
-  Anforderungen enthält, die nicht als Use Case Model spezifiziert werden können.
-  Das sind z.B. nicht-funktionale und systemweite Anforderungen. Im OpenUP (und
-  in diesem Repository) heißt dieses Dokument "System-wide Requirements".
-
-- Falls Sie Fehler korrigieren oder Verbesserungen machen möchten, können Sie
+Falls Sie Fehler korrigieren oder Verbesserungen machen möchten, können Sie
   dies gern über einen _Pull Request_ tun.
-
-### Referenzen
-
-- [Eclipse Process Framework](https://www.eclipse.org/epf/downloads/configurations/pubconfig_downloads.php)
-- [Open Unified Process 1.5 Dokumentation](https://www2.htw-dresden.de/~anke/openup/index.htm)
 
 ## Hinweise zu den AsciiDoc-Vorlagen
 
@@ -228,7 +206,7 @@ Folgende Schritte sind für eine Belegabgabe durchzuführen:
 
 ### Dokumentation
 
-Die OpenUP Templates im Ordner `docs` und `belegabgabe_se1` unterliegen der
+Die Templates im Ordner `docs` und `belegabgabe_se1` unterliegen der
 [CC-BY-4.0](https://choosealicense.com/licenses/cc-by-4.0/) Lizenz.
 
 ### Quellcode / Anderes

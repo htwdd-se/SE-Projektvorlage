@@ -5,7 +5,13 @@ include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
 
-== Allgemeine Informationen
+== Zweck
+Dieses Dokument beschreibt wesentliche Entwurfsentscheidungen auf Ebene der Komponenten und Module. Diese dienen als Vorgabe für die Implementierung und erleichtern das Systemverständnis.
+ 
+== Ausgewählte Sichten
+//Entwurfsklassendiagramme, Sequenzdiagramme
 
+== Schnittstellen
+//Dokumentation oder Verweise auf Schnittstellen, z.B. REST-APIs
 
-== ...
+== Datenmodell
