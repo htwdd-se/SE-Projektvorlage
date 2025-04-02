@@ -14,16 +14,14 @@ Engineering I und II benötigt. Im Detail sind das:
 **Inhaltsverzeichnis**
 
 - [Projektstruktur](#projektstruktur)
-- [Unified Process - Templates](#unified-process---templates)
+- [Dokumentvorlagen](#dokumentvorlagen)
 - [Hinweise zu den AsciiDoc-Vorlagen](#hinweise-zu-den-asciidoc-vorlagen)
 - [Belegabgabe in SE I](#belegabgabe-in-se-i)
 - [Lizenz](#lizenz)
 
 ## Projektstruktur
 
-Die Projektstruktur im Verzeichnis **docs** orientiert sich an den <ins>Work
-Products</ins> im OpenUP und den für die <ins>Abgabe im SE 1 Beleg</ins>
-geforderten Dokumenten.
+Die Projektstruktur im Verzeichnis **docs** orientiert sich an den wesentlichen Aspekten im Software Engineering und den für die <ins>Abgabe im SE 1 Beleg</ins> geforderten Dokumenten.
 
 ```text
 docs
@@ -45,7 +43,7 @@ docs
     └── test_cases.adoc
 ```
 
-## Dokumenten-Templates
+## Dokumentvorlagen
 
 Dieses Repository enthält Vorlagen im AsciiDoc-Format zur Dokumentation der verschiedenen Arbeitsergebnisse. Sie sind vereinfachte Varianten der Vorlagen aus dem Open Unified Process, Version 1.5.
 
