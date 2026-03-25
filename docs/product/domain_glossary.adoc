@@ -1,0 +1,131 @@
+= Domänenmodell und Glossar: {project-name}
+Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vorname3 Nachname3 <email3@domain.org>
+{localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
+// Platzhalter für weitere Dokumenten-Attribute
+
+_Dieses Dokument beschreibt die wesentlichen fachlichen Begriffe und ihre  Beziehungen untereinander. Es bildet die gemeinsame Sprache des Teams und aller Stakeholder — unabhängig von technischen Umsetzungsentscheidungen.
+Alle Begriffe in User Stories, Personas und Gesprächen mit Stakeholdern sollten hier definiert sein._
+
+---
+
+== Domänenmodell
+
+_Das Domänenmodell zeigt die wichtigsten fachlichen Konzepte (Entitäten) und ihre Beziehungen.
+Es beschreibt die Realität des Problemraums, nicht die Datenbankstruktur._
+
+=== Diagramm
+
+//Fügen Sie hier ein Diagramm ein — entweder als eingebettetes PlantUML oder als exportiertes Bild.
+
+[plantuml, domain-model, svg]
+....
+@startuml
+' Beispiel — bitte durch das echte Domänenmodell ersetzen
+
+entity Nutzer {
+  Name
+  E-Mail
+}
+
+entity Bestellung {
+  Bestellnummer
+  Datum
+  Status
+}
+
+entity Produkt {
+  Bezeichnung
+  Preis
+}
+
+Nutzer "1" --> "0..*" Bestellung : gibt auf
+Bestellung "1" --> "1..*" Produkt : enthält
+
+@enduml
+....
+
+NOTE: Das Domänenmodell wird im Laufe des Projekts weiterentwickelt.
+Änderungen sollten immer gemeinsam im Team besprochen und hier nachgepflegt werden.
+
+=== Beschreibung der Entitäten
+
+Kurze Erläuterung zu den im Modell enthaltenen Entitäten.
+
+[cols="1,3", options="header"]
+|===
+| Entität | Beschreibung
+
+| Nutzer
+| [Beschreibung der Entität und ihrer Rolle im System]
+
+| Bestellung
+| [Beschreibung der Entität und ihrer Rolle im System]
+
+| Produkt
+| [Beschreibung der Entität und ihrer Rolle im System]
+
+| [Weitere Entität]
+| [Beschreibung]
+|===
+
+=== Beschreibung der Beziehungen
+
+Beschreibung der wichtigsten Beziehungen zwischen den Entitäten, sofern diese besondere Kardinalitäten haben oder aus anderen Gründen erklärungsbedürftig sind.
+
+[cols="1,1,1,3", options="header"]
+|===
+| Von | Zu | Kardinalität | Bedeutung
+
+| Nutzer
+| Bestellung
+| 1 zu 0..*
+| Ein Nutzer kann keine oder mehrere Bestellungen aufgeben.
+
+| Bestellung
+| Produkt
+| 1 zu 1..*
+| Eine Bestellung enthält mindestens ein Produkt.
+
+| [Entität]
+| [Entität]
+| [z. B. 0..* zu 1]
+| [Beschreibung der Beziehung in natürlicher Sprache]
+|===
+
+== Glossar
+
+Alle *fachlichen* Begriffe und Abkürzungen werden hier alphabetisch definiert.
+Ziel ist eine einheitliche Sprache im gesamten Team.
+Technische Implementierungsdetails gehören nicht hierher!
+
+[cols="1,3,2", options="header"]
+|===
+| Begriff / Abkürzung | Definition | Synonyme / Abgrenzungen
+
+| Bestellung
+| Eine vom Nutzer ausgelöste Anforderung, ein oder mehrere Produkte zu erwerben.
+  Eine Bestellung durchläuft verschiedene Status (offen, bezahlt, versendet, abgeschlossen).
+| Auftrag; nicht zu verwechseln mit „Warenkorb" (noch nicht abgeschlossen)
+
+| Nutzer
+| Eine Person, die das System aktiv verwendet. Nutzer müssen registriert und eingeloggt
+  sein, um Bestellungen aufzugeben.
+| Anwender, Benutzer; abzugrenzen von „Administrator"
+
+| Produkt
+| Ein im System angebotener Artikel, der bestellt werden kann. Ein Produkt hat eine
+  Bezeichnung, einen Preis und eine Verfügbarkeit.
+| Artikel, Ware
+
+| [Begriff]
+| [Präzise, fachliche Definition in 1–3 Sätzen]
+| [Synonyme oder Abgrenzungen zu ähnlichen Begriffen]
+
+| [Begriff]
+| [Präzise, fachliche Definition in 1–3 Sätzen]
+| [Synonyme oder Abgrenzungen zu ähnlichen Begriffen]
+|===
+
+_Dieses Dokument wird kontinuierlich gepflegt. Änderungen an Fachbegriffen oder Beziehungen
+müssen hier nachgezogen werden, bevor sie in User Stories oder Code einfließen._

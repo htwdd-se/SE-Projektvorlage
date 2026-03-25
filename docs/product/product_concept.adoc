@@ -1,0 +1,240 @@
+= Produktkonzept: {project-name}
+Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vorname3 Nachname3 <email3@domain.org>
+{localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
+// Platzhalter für weitere Dokumenten-Attribute
+
+
+_Dieses Dokument beschreibt das Produkt auf konzeptioneller Ebene — was gebaut wird, warum, für wen, und unter welchen Rahmenbedingungen. Es richtet sich an alle Projektbeteiligten:
+Stakeholder, Product Owner, Designer und Entwickler:innen._
+
+_Das Dokument ist so aufgebaut, dass es relativ stabil bleibt. Detaillierte UX-Artefakte wie Personas, Nutzerkontext,
+Interaktionsflüsse und Design-Entscheidungen sind im UX-Konzept beschrieben._
+
+---
+
+== Motivation
+
+_Warum wird dieses Produkt gebaut? Welches Problem existiert heute, und warum ist es relevant?
+Dieser Abschnitt beschreibt den Ausgangszustand und den Handlungsbedarf — ohne bereits eine
+Lösung zu nennen. 3–5 Sätze genügen._
+
+[Hier die Ausgangssituation und den Handlungsbedarf beschreiben. Beispiel:
+„Studierende an der Hochschule haben heute keinen zentralen Überblick über verfügbare
+Lernräume. Die Suche nach freien Plätzen kostet täglich wertvolle Zeit und führt zu Frust.
+Eine einfache, mobil nutzbare Lösung fehlt bisher."]
+
+== Produktvision
+
+_Die Produktvision beschreibt in einem oder wenigen Sätzen den angestrebten Zielzustand.
+Sie ist inspirierend, prägnant und stabil — sie sollte sich über die gesamte Projektlaufzeit
+nicht wesentlich verändern._
+
+=== Visions-Statement
+
+____
+Für [Zielgruppe],
+die [Problem oder Bedarf],
+ist [Produktname]
+ein [Produktkategorie],
+das [zentraler Nutzen].
+Im Gegensatz zu [Alternative]
+bietet unser Produkt [entscheidender Unterschied].
+____
+
+//Beispiel: Für Studierende der HTWD, die zu wenig Zeit in der Mittagspause zum Essen haben, ist Flying Burger ein  Lieferdient für Burger, der per Drohne liefert. Anders als landgestützte Lieferdienste kann unser Produkt durchs Fenster direkt in den Hörsaal liefern.
+
+NOTE: Das Visions-Statement kann im Team mit der „Elevator Pitch"-Methode oder dem „Future Press Release"-Format erarbeitet werden.
+
+=== Zielbild
+
+_Optional: Beschreibe in 2–4 Sätzen, wie die Welt mit diesem Produkt aussieht. Was hat sich für die Nutzer:innen verändert?_
+//[Hier das Zielbild beschreiben]
+
+
+== Produktpositionierung
+_Wer sind die Zielgruppen, und wie positioniert sich das Produkt im Vergleich zu bestehenden Alternativen?_
+
+=== Zielgruppen
+
+[cols="1,3", options="header"]
+|===
+| Zielgruppe | Beschreibung
+
+| [z. B. Studierende]
+| [Kurzbeschreibung: Wer sind sie? Was ist ihre Motivation?]
+
+| [z. B. Lehrende]
+| [Kurzbeschreibung]
+
+| [Weitere Zielgruppe]
+| [Kurzbeschreibung]
+|===
+
+NOTE: Ausführliche Beschreibungen der Nutzenden — Personas, Nutzungskontext,
+typische Aufgaben — sind im link:ux_concept.adoc[UX-Konzept] dokumentiert.
+
+=== Wettbewerb & Alternativen
+
+[cols="1,3,2", options="header"]
+|===
+| Alternative | Beschreibung | Warum unser Produkt besser passt
+
+| [z. B. E-Mail-Anfrage an Sekretariat]
+| [Wie lösen Nutzer:innen das Problem heute?]
+| [Worin liegt unser Vorteil?]
+
+| [z. B. Aushang an schwarzem Brett]
+| [Beschreibung]
+| [Unterschied]
+
+| [Weitere Alternative]
+| [Beschreibung]
+| [Unterschied]
+|===
+
+
+== Stakeholder
+
+Wer hat Einfluss auf das Produkt oder ein Interesse an dessen Erfolg? Stakeholder formen oft Anforderungen und Rahmenbedingungen — ihre Nennung hier
+erklärt, warum bestimmte Entscheidungen getroffen wurden.
+
+[cols="1,2,2,1", options="header"]
+|===
+| Stakeholder | Rolle / Interesse | Erwartungen an das Produkt | Einfluss
+
+| [z. B. Hochschulverwaltung]
+| [Betreiber der Infrastruktur; will Raumauslastung optimieren]
+| [Auslastungsberichte, DSGVO-Konformität]
+| Hoch
+
+| [z. B. Studierende]
+| [Hauptnutzer:innen; wollen schnell freie Plätze finden]
+| [Einfache Bedienung, mobiler Zugang]
+| Mittel
+
+| [z. B. Lehrende]
+| [Nutzen Räume für Lehrveranstaltungen; wollen Konflikte vermeiden]
+| [Sichtbarkeit ihrer Buchungen]
+| Mittel
+
+| [Weiterer Stakeholder]
+| [Beschreibung]
+| [Erwartungen]
+| [Hoch / Mittel / Niedrig]
+|===
+
+== Hauptfunktionen
+
+Welche Kernfunktionen muss das Produkt bieten, um die Produktvision zu erfüllen? Jede Funktion ist direkt auf einen Nutzerbedarf zurückgeführt — nicht als technische
+Anforderung, sondern als Antwort auf ein Nutzungsproblem.
+
+Diese Hauptfunktionen sind Kandidaten für Epics im Product Backlog.
+
+[cols="2,2,1", options="header"]
+|===
+| Nutzerbedarf | Hauptfunktion | Priorität
+
+| Studierende wollen schnell sehen, welche Räume gerade frei sind.
+| Echtzeit-Übersicht freier Lernräume
+| Hoch
+
+| Nutzer:innen wollen einen Raum für einen bestimmten Zeitraum reservieren.
+| Raumbuchung mit Zeitfenster
+| Hoch
+
+| Nutzer:innen wollen ihre aktiven Buchungen verwalten.
+| Buchungsübersicht & Stornierung
+| Mittel
+
+| Verwaltung will die Auslastung der Räume analysieren.
+| Auslastungsberichte für Administratoren
+| Niedrig
+
+| [Nutzerbedarf]
+| [Hauptfunktion]
+| [Hoch / Mittel / Niedrig]
+|===
+
+NOTE: Die Reihenfolge entspricht einer ersten groben Priorisierung und wird im Rahmen
+der Backlog-Priorisierung verfeinert.
+
+== Qualitätsziele & Einschränkungen
+
+_Dieser Abschnitt beschreibt, unter welchen Rahmenbedingungen das Produkt entwickelt
+und betrieben wird. Es wird unterschieden zwischen Qualitätszielen (angestrebte
+Eigenschaften) und Einschränkungen (nicht verhandelbare Rahmenbedingungen)._
+
+=== Qualitätsziele
+
+_Qualitätsziele sind messbare oder zumindest überprüfbare Eigenschaften, die das
+Produkt erfüllen soll. Sie sollten spezifisch genug sein, um als Testkriterium zu dienen._
+
+NOTE: Dieses Dokument ist die einzige Quelle für Qualitätsziele und Einschränkungen.
+Das link:../technical/architecture.adoc[Architektur]-Dokument referenziert diese Anforderungen und dokumentiert die
+technischen Entscheidungen, die sich daraus ergeben — ohne sie hier zu wiederholen.
+
+[cols="1,3,2", options="header"]
+|===
+| Qualitätsziel | Beschreibung | Messkriterium
+
+| Benutzbarkeit
+| Das Produkt ist ohne Einarbeitung nutzbar.
+| Neue Nutzer:innen finden die Kernfunktion innerhalb von 2 Minuten ohne Hilfe.
+
+| Performance
+| Das Produkt reagiert schnell auf Nutzerinteraktionen.
+| Seitenladezeit unter 2 Sekunden bei normaler Netzwerkverbindung.
+
+| Verfügbarkeit
+| Das Produkt ist während der Hochschulöffnungszeiten zuverlässig erreichbar.
+| Verfügbarkeit ≥ 99 % während Betriebszeiten.
+
+| [Qualitätsziel]
+| [Beschreibung]
+| [Messkriterium]
+|===
+
+=== Einschränkungen
+
+_Einschränkungen sind Rahmenbedingungen, die nicht verhandelbar sind — technische,
+organisatorische, rechtliche oder zeitliche Vorgaben._
+
+[cols="1,2,1", options="header"]
+|===
+| Einschränkung | Beschreibung | Kategorie
+
+| Betrieb auf Hochschulinfrastruktur
+| Das System muss auf den vorhandenen Servern der Hochschule betrieben werden können.
+| Technisch
+
+| DSGVO-Konformität
+| Personenbezogene Daten dürfen nur gemäß DSGVO verarbeitet und gespeichert werden.
+| Rechtlich
+
+| Projektlaufzeit
+| Das Produkt muss innerhalb eines Semesters (ca. 4 Monate) lieferbar sein.
+| Zeitlich
+
+| [Einschränkung]
+| [Beschreibung]
+| [Technisch / Rechtlich / Organisatorisch / Zeitlich]
+|===
+
+
+== Versionsverlauf
+
+[cols="1,1,2", options="header"]
+|===
+| Version | Datum | Änderung
+
+| 1.0
+| [Datum]
+| Initiale Version nach Kick-off-Workshop
+
+|===
+
+---
+
+_Dieses Dokument ist bewusst stabil gehalten. Änderungen sollten nur bei wesentlichen
+Richtungsentscheidungen vorgenommen werden und im Versionsverlauf dokumentiert sein._

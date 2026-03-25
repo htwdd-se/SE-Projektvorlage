@@ -1,0 +1,317 @@
+= Architekturdokument: {project-name}
+Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vorname3 Nachname3 <email3@domain.org>
+{localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
+// Platzhalter für weitere Dokumenten-Attribute
+
+
+_Dieses Dokument beschreibt die technische Architektur des Systems — welche Technologien
+eingesetzt werden, wie das System in seine Umgebung eingebettet ist, und welche
+Architekturentscheidungen getroffen wurden. Der Fokus liegt auf dem *Warum* hinter
+technischen Entscheidungen._
+
+_Qualitätsziele und Einschränkungen sind im Produktkonzept als einziger Quelle definiert.
+Dieses Dokument referenziert sie und dokumentiert ausschließlich die technischen
+Konsequenzen, die sich daraus ergeben._
+
+_Detaillierte Beschreibungen der internen Softwarestruktur — Schichten, Komponenten,
+Datenmodell, Interaktionsflüsse — sind im link:design.adoc[Designdokument] beschrieben._
+
+---
+
+== Architektursichten
+
+_Der Systemkontext zeigt das System als Ganzes in seiner Umgebung: welche externen Akteure und Systeme mit ihm interagieren, und über welche Schnittstellen. Er beantwortet die Frage: Was gehört zum System, und was liegt außerhalb?_
+
+=== Systemkontext
+//Level 1 im C4-Modell
+
+[plantuml, system-context, svg]
+....
+@startuml
+skinparam monochrome true
+skinparam defaultFontSize 13
+skinparam rectangleBorderThickness 2
+
+actor "Nutzer:in" as user
+actor "Administrator:in" as admin
+
+rectangle "[Systemname]" as system #lightgray
+
+database "Datenbank" as db
+rectangle "Externer Dienst\n[z. B. LDAP / SSO]" as ext1
+rectangle "Externer Dienst\n[z. B. E-Mail-Server]" as ext2
+
+user --> system : nutzt (Web / Mobile)
+admin --> system : verwaltet
+system --> db : liest / schreibt
+system --> ext1 : Authentifizierung
+system --> ext2 : Benachrichtigungen
+
+@enduml
+....
+
+NOTE: Das Kontextdiagramm zeigt ausschließlich externe Schnittstellen.
+Die interne Struktur des Systems ist im Designdokument beschrieben.
+
+*Externe Schnittstellen:*
+
+[cols="1,1,2,1", options="header"]
+|===
+| Schnittstelle | Typ | Beschreibung | Protokoll / Format
+
+| [z. B. Hochschul-LDAP]
+| Externes System
+| Authentifizierung und Nutzerverwaltung über bestehende Hochschulinfrastruktur
+| LDAP / TLS
+
+| [z. B. SMTP-Server]
+| Externes System
+| Versand von Benachrichtigungs-E-Mails an Nutzende
+| SMTP / TLS
+
+| [z. B. Nutzer:in via Browser]
+| Menschlicher Akteur
+| Zugriff über Web-Oberfläche
+| HTTPS / REST
+
+| [Weitere Schnittstelle]
+| [Typ]
+| [Beschreibung]
+| [Protokoll]
+|===
+
+=== Laufzeitumgebungen (Container Diagramm)
+//Level 2 im C4-Modell
+Diese Sicht gibt an, welche Umgebungen für den Code vorgesehen sind, z.B. JVM, Node.js, DBMS, Browser, Android Runtime.
+
+=== Verteilungsdiagramm (Deployment Diagramm)
+//Beschreibt die physischen Knoten (Rechner) des Systems und Komponenten, die in diesen Knoten ausgeführt werden. 
+
+
+== Technologie-Stack
+
+_Dieser Abschnitt listet die eingesetzten Technologien und begründet die Wahl.
+Detaillierte Architekturentscheidungen mit Alternativen und Konsequenzen
+sind in <<Architekturentscheidungen>> dokumentiert._
+
+=== Übersicht
+
+[cols="1,1,2,2", options="header"]
+|===
+| Bereich | Technologie | Begründung | Entscheidung
+
+| Frontend
+| [z. B. React 18]
+| [z. B. Teamkenntnisse; große Community; Komponentenmodell]
+| [z. B. ADR-002]
+
+| Backend
+| [z. B. Spring Boot 3]
+| [z. B. Vorgabe im Studiengang; gute Dokumentation]
+| [z. B. ADR-001]
+
+| Datenbank
+| [z. B. PostgreSQL 15]
+| [z. B. Relationales Modell passend; auf Hochschulinfrastruktur verfügbar]
+| [z. B. ADR-003]
+
+| Authentifizierung
+| [z. B. OAuth2 / Hochschul-SSO]
+| [z. B. Pflichtintegration; kein eigenes Nutzermanagement nötig]
+| [z. B. ADR-004]
+
+| Containerisierung
+| [z. B. Docker / Docker Compose]
+| [z. B. Reproduzierbare Umgebung für alle Teammitglieder]
+| [z. B. ADR-005]
+
+| CI/CD
+| [z. B. GitHub Actions]
+| [z. B. Direkte Integration mit Repository; kostenlos für Studierende]
+| [z. B. ADR-006]
+
+| [Weiterer Bereich]
+| [Technologie]
+| [Begründung]
+| [ADR-Referenz oder —]
+|===
+
+== Architekturrelevante Anforderungen
+
+_Dieser Abschnitt dokumentiert, welche Qualitätsziele und Einschränkungen aus dem
+Produktkonzept direkte Auswirkungen auf Architekturentscheidungen haben._
+
+IMPORTANT: Qualitätsziele und Einschränkungen werden hier *nicht* neu definiert —
+sie sind im link:../product/product_concept.adoc[Produktkonzept] als einziger Quelle festgelegt.
+Dieser Abschnitt zeigt ausschließlich die technischen Konsequenzen, die sich aus
+diesen Anforderungen ergeben, und verweist auf die zugehörigen Entscheidungen.
+
+[cols="2,3,2", options="header"]
+|===
+| Anforderung (aus Produktkonzept) | Technische Konsequenz | Entscheidung
+
+| Performanceziel: Seitenladezeit < 2 s
+| Server-Side Rendering für initiales Laden erforderlich;
+  statische Assets über CDN ausliefern
+| ADR-002
+
+| DSGVO-Konformität
+| Keine personenbezogenen Daten in Logs; Datensparsamkeit im Datenbankmodell;
+  Recht auf Löschung muss implementierbar sein
+| ADR-003, ADR-004
+
+| Betrieb auf Hochschulinfrastruktur
+| Keine Cloud-only-Dienste; Containerisierung für Portabilität erforderlich
+| ADR-005
+
+| Verfügbarkeit ≥ 99 % während Betriebszeiten
+| Statusüberwachung und automatischer Neustart über Container-Orchestrierung
+| ADR-005
+
+| [Anforderung]
+| [Technische Konsequenz]
+| [ADR-Referenz oder —]
+|===
+
+---
+
+== Architekturentscheidungen
+
+_Architekturentscheidungen (Architecture Decision Records, ADRs) dokumentieren
+wichtige technische Entscheidungen: Was wurde entschieden, warum, welche
+Alternativen wurden verworfen, und welche Konsequenzen hat die Entscheidung._
+
+_Jede Entscheidung, die schwer rückgängig zu machen ist oder das gesamte System
+betrifft, sollte hier festgehalten werden. Kleine, lokale Implementierungsdetails
+gehören nicht hierher._
+
+NOTE: ADRs werden nicht gelöscht oder überschrieben — sie werden als
+„ersetzt durch ADR-XXX" markiert. So bleibt die Entscheidungshistorie nachvollziehbar.
+
+=== ADR-001: [Titel der Entscheidung]
+
+[cols="1,3"]
+|===
+| *Status*
+| [Vorgeschlagen \| Akzeptiert \| Abgelehnt \| Ersetzt durch ADR-XXX]
+
+| *Datum*
+| [Datum]
+
+| *Kontext*
+| [Warum musste diese Entscheidung getroffen werden?
+  Welches Problem oder welche Anforderung hat sie ausgelöst?
+  Verweise auf Qualitätsziele oder Einschränkungen aus dem Produktkonzept falls relevant.]
+
+| *Entscheidung*
+| [Was wurde entschieden? Formuliere die Entscheidung als aktiven Satz:
+  „Wir verwenden X, weil..."]
+
+| *Alternativen*
+| [Welche Alternativen wurden in Betracht gezogen und warum verworfen?]
+
+| *Konsequenzen*
+| [Was wird durch diese Entscheidung einfacher? Was wird schwieriger oder teurer?
+  Welche neuen Risiken entstehen?]
+|===
+
+---
+
+=== ADR-002: [Titel der Entscheidung]
+
+[cols="1,3"]
+|===
+| *Status*
+| [Vorgeschlagen \| Akzeptiert \| Abgelehnt \| Ersetzt durch ADR-XXX]
+
+| *Datum*
+| [Datum]
+
+| *Kontext*
+| [Kontext]
+
+| *Entscheidung*
+| [Entscheidung]
+
+| *Alternativen*
+| [Alternativen]
+
+| *Konsequenzen*
+| [Konsequenzen]
+|===
+
+---
+
+=== ADR-003: [Titel der Entscheidung]
+
+[cols="1,3"]
+|===
+| *Status*
+| [Vorgeschlagen \| Akzeptiert \| Abgelehnt \| Ersetzt durch ADR-XXX]
+
+| *Datum*
+| [Datum]
+
+| *Kontext*
+| [Kontext]
+
+| *Entscheidung*
+| [Entscheidung]
+
+| *Alternativen*
+| [Alternativen]
+
+| *Konsequenzen*
+| [Konsequenzen]
+|===
+
+NOTE: Weitere ADRs nach demselben Schema hinzufügen. Die Nummerierung ist
+fortlaufend und wird nie wiederverwendet.
+
+== Risiken & technische Schulden
+
+_Dieser Abschnitt dokumentiert bekannte technische Risiken und bewusst eingegangene
+technische Kompromisse (Technical Debt). Transparenz hier verhindert, dass diese
+Punkte in Vergessenheit geraten._
+
+=== Technische Risiken
+
+[cols="2,1,2,2", options="header"]
+|===
+| Risiko | Auswirkung | Wahrscheinlichkeit | Maßnahme
+
+| [z. B. LDAP-Schnittstelle der Hochschule ist undokumentiert]
+| Hoch
+| Mittel
+| [z. B. Frühzeitiger Prototyp zur Validierung; Fallback auf lokale Authentifizierung]
+
+| [z. B. Performance bei > 200 gleichzeitigen Nutzenden unbekannt]
+| Mittel
+| Niedrig
+| [z. B. Lasttest ab Sprint 4 eingeplant]
+
+| [Weiteres Risiko]
+| [Hoch / Mittel / Niedrig]
+| [Hoch / Mittel / Niedrig]
+| [Maßnahme oder Akzeptanz]
+|===
+
+=== Technische Schulden
+
+[cols="2,2,1", options="header"]
+|===
+| Beschreibung | Begründung für Kompromiss | Backlog-Eintrag
+
+| [z. B. Keine Datenbankmigrationen mit Flyway — manuelle Skripte]
+| [z. B. Zeitdruck in Sprint 2; wird in Sprint 5 nachgeholt]
+| [z. B. TECH-42]
+
+| [z. B. Fehlerbehandlung in API-Endpunkten unvollständig]
+| [z. B. MVP-Fokus; nur Hauptpfade abgedeckt]
+| [z. B. TECH-51]
+
+| [Weitere technische Schuld]
+| [Begründung]
+| [Ticket-Referenz oder —]
+|===

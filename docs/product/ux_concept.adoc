@@ -1,0 +1,288 @@
+= UX-Konzept: {project-name}
+Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vorname3 Nachname3 <email3@domain.org>
+{localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
+// Platzhalter für weitere Dokumenten-Attribute
+
+_Dieses Dokument beschreibt, wer das Produkt nutzt und wie — aus der Perspektive der Nutzenden. Es ergänzt das Produktkonzept um Personas, Nutzungskontext und
+systemweite Interaktionsflüsse und dient als gemeinsame Referenz für Design- und Entwicklungsentscheidungen._
+
+_Individuelle Wireframes einzelner Features werden direkt in den zugehörigen User Stories im Product Backlog gepflegt (verlinkt oder kopiert aus Miro oder anderem Tool). Dieses Dokument enthält nur Artefakte, die mehrere Stories oder das gesamte Produkt betreffen._
+
+---
+
+== Personas
+
+_Personas sind fiktive, aber realitätsbasierte Beschreibungen typischer Nutzender.
+Sie helfen dem Team, Entscheidungen konsequent aus Nutzerperspektive zu treffen.
+Personas sollten auf echten Nutzerinterviews oder Beobachtungen basieren — nicht
+auf Annahmen allein._
+
+_Hinweis: Im link:product_concept.adoc[Produktkonzept] werden Zielgruppen nur benannt. Hier werden sie als Personas ausgearbeitet._
+
+=== Persona 1: [Name]
+
+[cols="1,3"]
+|===
+| *Rolle*
+| [z. B. Studierende im 3. Semester, Informatik]
+
+| *Alter*
+| [z. B. 22 Jahre]
+
+| *Zitat*
+| _„[Ein prägnanter Satz, der ihre Haltung oder ihr Problem auf den Punkt bringt.]"_
+
+| *Ziele*
+| [Was will diese Person erreichen? Was motiviert sie?]
+
+| *Frustrationen*
+| [Was hindert sie heute daran, ihre Ziele zu erreichen?]
+
+| *Verhalten & Kontext*
+| [Wie und wann nutzt sie digitale Produkte? Welche Geräte? Welche Erfahrung?]
+
+| *Bezug zum Produkt*
+| [Warum ist dieses Produkt für sie relevant? Was ist ihr primärer Nutzen?]
+|===
+
+=== Persona 2: [Name]
+
+[cols="1,3"]
+|===
+| *Rolle*
+| [z. B. Verwaltungsangestellte, zuständig für Raumvergabe]
+
+| *Alter*
+| [z. B. 45 Jahre]
+
+| *Zitat*
+| _„[Prägnantes Zitat]"_
+
+| *Ziele*
+| [Ziele]
+
+| *Frustrationen*
+| [Frustrationen]
+
+| *Verhalten & Kontext*
+| [Verhalten & Kontext]
+
+| *Bezug zum Produkt*
+| [Bezug zum Produkt]
+|===
+
+NOTE: Für jedes Projekt sind 2–4 Personas ausreichend. Mehr Personas verwässern
+den Fokus. Wenn eine Persona in keiner User Story vorkommt, wird sie gestrichen.
+
+== Nutzungskontext
+
+_Der Nutzungskontext gemäß DIN EN ISO 9241-11 beschreibt die Lebenswirklichkeit der Personas — unabhängig vom Produkt. Er zeigt, in welchem Umfeld, mit welchen Mitteln und unter welchen Bedingungen das Produkt genutzt wird._
+
+[cols="1,3", options="header"]
+|===
+| Aspekt | Beschreibung
+ 
+| Benutzer
+| [Eigenschaften, Kenntnisse, Erfahrung, Motivation der Nutzenden.
+(Verweis auf Personas für ausführliche Beschreibungen)]
+ 
+| Ziele & Aufgaben
+| [Was wollen Nutzende erreichen?
+Welche konkreten Aufgaben führen sie dazu aus?]
+ 
+| Ressourcen
+| [Hardware, Software, Eingabegeräte, Hilfsmittel, die zur Nutzung des Produkts benötigt werden oder vorhanden sind.]
+ 
+| Umgebung
+| [Technische Umgebung: Netzwerk, Plattformen, Betriebssysteme, Interoperabilität.
+
+ Physische Umgebung: Ort der Nutzung, Lichtverhältnisse, Lärm, Mobilität.
+
+Soziale & organisatorische Umgebung: Organisationsstruktur, Zusammenarbeit, Unterbrechungen, rechtliche oder regulatorische Rahmenbedingungen.]
+ 
+|===
+
+=== Aktuelle Situation (ohne das Produkt)
+
+_Wie lösen die Nutzenden ihr Problem heute? Diese Beschreibung zeigt, was das Produkt
+verbessern soll — und macht den Mehrwert explizit._
+
+[Beschreibe den heutigen Ablauf in 3–5 Sätzen oder als kurze Schrittfolge. Beispiel: „Heute fragt Maria an der Infotheke nach freien Räumen, erhält eine Liste per E-Mail, und stellt beim Ankommen fest, dass der Raum bereits belegt ist.
+Der Prozess kostet sie im Schnitt 20 Minuten pro Tag."]
+
+=== Nutzungshürden & Risiken
+
+_Was könnte die Akzeptanz oder Nutzung des Produkts beeinträchtigen?_
+
+[cols="2,2", options="header"]
+|===
+| Hürde / Risiko | Mögliche Reaktion im Design
+
+| [z. B. Datenschutzbedenken bei Registrierungspflicht]
+| [z. B. Gastzugang für erste Nutzung anbieten]
+
+| [z. B. Schlechte WLAN-Verfügbarkeit in Gebäudeteilen]
+| [z. B. Offline-Ansicht für zuletzt geladene Daten]
+
+| [Weitere Hürde]
+| [Reaktion]
+|===
+
+== Systemweite Interaktionsflüsse
+
+_Dieser Abschnitt beschreibt Abläufe, die mehrere Features oder Bereiche des Produkts
+umfassen. Einzelne Feature-Wireframes werden in den jeweiligen User Stories gepflegt.
+Hier dokumentieren wir nur Flüsse auf Systemebene, z.B. mit UML-Aktivitätsdiagrammen._
+
+=== [Flussname, z. B. Onboarding-Flow]
+
+_Beschreibe kurz, was dieser Fluss abdeckt und welche Personas er betrifft._
+
+[plantuml, onboarding-flow, svg]
+....
+@startuml
+skinparam monochrome true
+skinparam defaultFontSize 13
+
+start
+:App öffnen;
+if (Bereits registriert?) then (ja)
+  :Login;
+else (nein)
+  :Registrierung;
+  :Bestätigungs-E-Mail;
+  :E-Mail bestätigen;
+endif
+:Startseite;
+stop
+
+@enduml
+....
+
+[cols="1,1,2", options="header"]
+|===
+| Schritt | Beteiligte Persona | Anmerkung
+
+| App öffnen
+| Maria (Studierende)
+| Erster Einstiegspunkt; muss sofort orientieren
+
+| Login / Registrierung
+| Alle Personas
+| Registrierung nur beim ersten Besuch; danach automatischer Login
+
+| Startseite
+| Alle Personas
+| Zeigt direkt die wichtigste Funktion — keine unnötige Zwischenseite
+|===
+
+---
+
+=== [Weiterer Fluss, z. B. Buchungsabbruch & Fehlerbehandlung]
+
+_Beschreibe den Fluss und ergänze ein Diagramm nach demselben Muster._
+
+[plantuml, error-flow, svg]
+....
+@startuml
+skinparam monochrome true
+
+start
+:Buchung starten;
+if (Raum noch verfügbar?) then (ja)
+  :Buchung bestätigen;
+  :Bestätigung anzeigen;
+else (nein)
+  :Fehlermeldung anzeigen;
+  :Alternative Räume vorschlagen;
+endif
+stop
+
+@enduml
+....
+
+== Designsystem & Interaktionsprinzipien
+
+_Dieser Abschnitt dokumentiert systemweite Design- und Interaktionsentscheidungen,
+die konsistent über alle Features hinweg gelten. Sie bilden die Basis für alle
+Wireframes und UI-Implementierungen._
+
+=== Visuelle Sprache
+
+[cols="1,3", options="header"]
+|===
+| Aspekt | Entscheidung & Begründung
+
+| Farbpalette
+| [z. B. Primärfarbe: Hochschulblau #003D6E; Akzent: #E87722;
+  Begründung: Corporate Identity der Hochschule]
+
+| Typografie
+| [z. B. Fließtext: Inter 16px; Überschriften: Inter Bold;
+  Begründung: Hohe Lesbarkeit auf kleinen Bildschirmen]
+
+| Ikonografie
+| [z. B. Material Icons; konsistentes Icon-Set im gesamten Produkt]
+
+| Bildsprache
+| [z. B. Keine Stock-Fotos; Illustrationen im Flat-Design-Stil]
+|===
+
+=== Interaktionsprinzipien
+
+_Vereinbarte UX-Regeln, die für das gesamte Produkt gelten. Jede Entscheidung
+wird begründet, damit sie nicht aus Unwissenheit verletzt wird._
+
+[cols="2,3", options="header"]
+|===
+| Prinzip | Beschreibung & Begründung
+
+| Destruktive Aktionen werden immer bestätigt.
+| Lösch- oder Stornieraktionen erfordern eine explizite Bestätigung durch die Nutzenden.
+  Verhindert unbeabsichtigte Datenverluste.
+
+| Leerzustände erklären sich und schlagen eine Aktion vor.
+| Wenn eine Liste leer ist, zeigen wir eine kurze Erklärung und einen Call-to-Action —
+  niemals nur eine leere Fläche. Reduziert Orientierungslosigkeit.
+
+| Fehlermeldungen sind verständlich und handlungsorientiert.
+| Fehlermeldungen nennen die Ursache in einfacher Sprache und schlagen einen
+  nächsten Schritt vor. Kein technischer Jargon für Endnutzer:innen.
+
+| Kernfunktionen sind mit einer Hand erreichbar.
+| Primäre Aktionen befinden sich im unteren Bildschirmbereich (Daumenzone).
+  Optimiert für einhändige Smartphone-Nutzung.
+
+| [Weiteres Prinzip]
+| [Beschreibung & Begründung]
+|===
+
+=== Barrierefreiheit
+
+[cols="1,3", options="header"]
+|===
+| Aspekt | Anforderung
+
+| Kontrastverhältnis
+| Mindestens WCAG 2.1 Level AA (Kontrast ≥ 4,5:1 für Fließtext)
+
+| Tastaturnavigation
+| Alle Kernfunktionen sind per Tastatur bedienbar
+
+| Screenreader
+| Alle interaktiven Elemente haben sinnvolle ARIA-Labels
+
+| Schriftgröße
+| Keine Schrift unter 14px; Nutzer:innen können Systemschriftgröße nutzen
+
+| [Weiterer Aspekt]
+| [Anforderung]
+|===
+
+
+_Dieses Dokument wird kontinuierlich weiterentwickelt — insbesondere nach Nutzerinterviews,
+Usability-Tests oder wesentlichen Designentscheidungen. Individuelle Feature-Wireframes
+werden nicht hier, sondern direkt in den User Stories im Product Backlog gepflegt._
+
+_Der Zweck dieses Dokuments ist es, die wesentlichen Bedarfe und Funktionalitäten des Systems {project-system-name} überblicksartig zu beschreiben. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser Bedarfe. Die Details, wie das System {project-system-name} diese Bedarfe erfüllt, werden durch User Stories im Product Backlog sowie dem UX-Konzept beschrieben._

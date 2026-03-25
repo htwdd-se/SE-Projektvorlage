@@ -1,0 +1,406 @@
+= Softwaredesign: {project-name}
+Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vorname3 Nachname3 <email3@domain.org>
+{localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
+// Platzhalter für weitere Dokumenten-Attribute
+
+_Dieses Dokument beschreibt die interne Struktur des Systems — wie der Code organisiert ist,
+aus welchen Komponenten das System besteht, wie diese zusammenarbeiten, und welche
+Designmuster eingesetzt werden. Der Fokus liegt auf dem *Wie* der Implementierung._
+
+_Das Systemkontext-Diagramm und die Architekturentscheidungen (ADRs) sind im
+Architekturdokument (`architecture.adoc`) beschrieben. Dieses Dokument vertieft die interne Sicht._
+
+_Das Datenmodell hier beschreibt die technische Struktur der Persistenz. Die fachliche Bedeutung der Entitäten ist im Domänenmodell (`domain_glossary.adoc`) definiert._
+
+---
+
+== Systemübersicht & Schichtenarchitektur
+
+_Dieser Abschnitt beschreibt, in welche Schichten oder Bereiche das System aufgeteilt ist
+und welche Verantwortung jede Schicht trägt. Eine klare Schichtentrennung verhindert,
+dass Geschäftslogik, Datenzugriff und Präsentation unkontrolliert vermischt werden._
+
+=== Schichtendiagramm
+
+[plantuml, layer-diagram, svg]
+....
+@startuml
+skinparam monochrome true
+skinparam defaultFontSize 13
+skinparam rectangleBorderThickness 1
+
+rectangle "Präsentationsschicht\n(Frontend / API-Controller)" as presentation
+rectangle "Anwendungsschicht\n(Services / Use Cases)" as application
+rectangle "Domänenschicht\n(Entitäten / Geschäftslogik)" as domain
+rectangle "Persistenzschicht\n(Repositories / Datenbank)" as persistence
+
+presentation -down-> application : ruft auf
+application -down-> domain : verwendet
+application -down-> persistence : liest / schreibt
+domain -[hidden]down- persistence
+
+note right of presentation : HTTP-Anfragen,\nSerialisierung, Routing
+note right of application : Koordination,\nTransaktionen
+note right of domain : Fachliche Regeln,\nValidierung
+note right of persistence : Datenbankzugriff,\nMapping
+
+@enduml
+....
+
+=== Beschreibung der Schichten
+
+[cols="1,2,2", options="header"]
+|===
+| Schicht | Verantwortung | Darf abhängen von
+
+| Präsentationsschicht
+| HTTP-Anfragen entgegennehmen und beantworten;
+  Eingaben validieren; Antworten serialisieren;
+  Routing und Fehlerbehandlung auf API-Ebene
+| Anwendungsschicht
+
+| Anwendungsschicht
+| Fachliche Abläufe koordinieren (Use Cases);
+  Transaktionen verwalten; externe Dienste aufrufen;
+  zwischen Schichten vermitteln
+| Domänenschicht, Persistenzschicht
+
+| Domänenschicht
+| Fachliche Entitäten und Regeln kapseln;
+  Invarianten sicherstellen;
+  Kernlogik unabhängig von Infrastruktur halten
+| Keine äußeren Schichten
+
+| Persistenzschicht
+| Datenbankzugriff abstrahieren;
+  Entitäten auf Datenbankstrukturen mappen;
+  Abfragelogik kapseln
+| Domänenschicht (Entitäten)
+|===
+
+NOTE: Die Domänenschicht darf *nicht* von Persistenz- oder Präsentationsschicht
+abhängen. Diese Regel ist der häufigste Architekturverstoss in Studentenprojekten
+und sollte in Code Reviews explizit geprüft werden.
+
+== Komponentenübersicht
+
+_Dieser Abschnitt beschreibt die wichtigsten Komponenten des Systems — Module,
+Pakete oder Services — und ihre Verantwortlichkeiten. Eine Komponente ist eine
+zusammengehörige Einheit von Code mit einer klar definierten Aufgabe._
+
+=== Komponentendiagramm
+
+[plantuml, component-diagram, svg]
+....
+@startuml
+skinparam monochrome true
+skinparam defaultFontSize 13
+
+package "Frontend" {
+  component "[z. B. Buchungskomponente]" as booking_ui
+  component "[z. B. Authentifizierungskomponente]" as auth_ui
+  component "[z. B. Gemeinsame UI-Komponenten]" as shared_ui
+}
+
+package "Backend" {
+  component "[z. B. Buchungs-Controller]" as booking_ctrl
+  component "[z. B. Buchungs-Service]" as booking_svc
+  component "[z. B. Nutzer-Service]" as user_svc
+  component "[z. B. Benachrichtigungs-Service]" as notification_svc
+}
+
+package "Persistenz" {
+  component "[z. B. Buchungs-Repository]" as booking_repo
+  component "[z. B. Nutzer-Repository]" as user_repo
+  database "Datenbank" as db
+}
+
+rectangle "Externer Dienst\n[z. B. E-Mail]" as ext
+
+booking_ui --> booking_ctrl : REST
+auth_ui --> user_svc : REST
+booking_ctrl --> booking_svc
+booking_svc --> booking_repo
+booking_svc --> notification_svc
+user_svc --> user_repo
+booking_repo --> db
+user_repo --> db
+notification_svc --> ext
+
+@enduml
+....
+
+=== Komponentenbeschreibung
+
+[cols="1,2,2", options="header"]
+|===
+| Komponente | Verantwortung | Schnittstellen
+
+| [z. B. Buchungs-Controller]
+| HTTP-Anfragen für Buchungsvorgänge entgegennehmen;
+  Eingaben validieren; Antworten zurückgeben
+| REST-API (eingehend); Buchungs-Service (ausgehend)
+
+| [z. B. Buchungs-Service]
+| Buchungslogik koordinieren; Verfügbarkeit prüfen;
+  Transaktionen verwalten; Benachrichtigungen auslösen
+| Buchungs-Repository; Benachrichtigungs-Service
+
+| [z. B. Buchungs-Repository]
+| Buchungsdaten lesen und schreiben;
+  Datenbankabfragen kapseln
+| Datenbank (JPA / SQL)
+
+| [z. B. Benachrichtigungs-Service]
+| E-Mail-Benachrichtigungen versenden;
+  Vorlagen verwalten
+| Externer SMTP-Dienst
+
+| [Weitere Komponente]
+| [Verantwortung]
+| [Schnittstellen]
+|===
+
+---
+
+== Wichtige Interaktionsflüsse
+
+_Sequenzdiagramme zeigen, wie Komponenten bei typischen Abläufen zusammenarbeiten.
+Dokumentiert werden hier nur die wichtigsten und komplexesten Flüsse —
+nicht jede einfache CRUD-Operation._
+
+=== [Flussname, z. B. Raum buchen]
+
+_Beschreibe kurz, was dieser Ablauf zeigt und warum er dokumentiert wird._
+
+[plantuml, sequence-booking, svg]
+....
+@startuml
+skinparam monochrome true
+skinparam defaultFontSize 12
+
+actor "Nutzer:in" as user
+participant "Buchungs-\nController" as ctrl
+participant "Buchungs-\nService" as svc
+participant "Buchungs-\nRepository" as repo
+participant "Benachrichtigungs-\nService" as notify
+
+user -> ctrl : POST /buchungen\n{raumId, zeitraum}
+ctrl -> ctrl : Eingabe validieren
+ctrl -> svc : buchungErstellen(raumId, zeitraum, nutzerId)
+svc -> repo : istVerfuegbar(raumId, zeitraum)
+repo --> svc : true
+svc -> repo : buchungSpeichern(buchung)
+repo --> svc : gespeicherteBuchung
+svc -> notify : bestaetigungSenden(buchung)
+notify --> svc : OK
+svc --> ctrl : buchung
+ctrl --> user : 201 Created\n{buchungsId, details}
+
+@enduml
+....
+
+---
+
+=== [Weiterer Fluss, z. B. Fehlerfall: Raum nicht verfügbar]
+
+[plantuml, sequence-conflict, svg]
+....
+@startuml
+skinparam monochrome true
+skinparam defaultFontSize 12
+
+actor "Nutzer:in" as user
+participant "Buchungs-\nController" as ctrl
+participant "Buchungs-\nService" as svc
+participant "Buchungs-\nRepository" as repo
+
+user -> ctrl : POST /buchungen\n{raumId, zeitraum}
+ctrl -> svc : buchungErstellen(raumId, zeitraum, nutzerId)
+svc -> repo : istVerfuegbar(raumId, zeitraum)
+repo --> svc : false
+svc --> ctrl : RaumNichtVerfuegbarException
+ctrl --> user : 409 Conflict\n{message, alternativen}
+
+@enduml
+....
+
+NOTE: Flussnamen im Diagramm sollten identisch mit den Methodennamen im Code sein.
+Das macht es einfacher, vom Diagramm zum Code zu navigieren und umgekehrt.
+
+---
+
+== Datenmodell
+
+_Dieser Abschnitt beschreibt die technische Datenbankstruktur: Tabellen, Spalten,
+Datentypen und Beziehungen. Er beantwortet die Frage: Wie werden die Daten gespeichert?_
+
+NOTE: Die *fachliche* Bedeutung der Entitäten — was sie repräsentieren und wie sie sich zueinander verhalten — ist im Domänenmodell (`domain_glossary.adoc`) beschrieben.
+Dieses Dokument zeigt ausschließlich die technische Persistenzstruktur.
+
+=== Datenbankdiagramm
+
+[plantuml, data-model, svg]
+....
+@startuml
+skinparam monochrome true
+skinparam defaultFontSize 12
+
+entity "nutzer" as user {
+  * id : UUID <<PK>>
+  --
+  * email : VARCHAR(255) <<UNIQUE>>
+  * name : VARCHAR(100)
+  * erstellt_am : TIMESTAMP
+}
+
+entity "raum" as room {
+  * id : UUID <<PK>>
+  --
+  * bezeichnung : VARCHAR(100)
+  * kapazitaet : INTEGER
+  * standort : VARCHAR(100)
+}
+
+entity "buchung" as booking {
+  * id : UUID <<PK>>
+  --
+  * nutzer_id : UUID <<FK>>
+  * raum_id : UUID <<FK>>
+  * beginn : TIMESTAMP
+  * ende : TIMESTAMP
+  * status : VARCHAR(20)
+  * erstellt_am : TIMESTAMP
+}
+
+user ||--o{ booking : "gibt auf"
+room ||--o{ booking : "ist Gegenstand von"
+
+@enduml
+....
+
+=== Tabellenbeschreibung
+
+[cols="1,1,3", options="header"]
+|===
+| Tabelle | Spalte | Beschreibung & Besonderheiten
+
+.4+| nutzer
+| id | UUID als Primärschlüssel; wird vom System generiert
+| email | Eindeutig; wird für Login und Benachrichtigungen verwendet
+| name | Anzeigename; kein Pflichtfeld nach DSGVO-Anforderung
+| erstellt_am | Automatisch gesetzt; nicht änderbar
+
+.4+| buchung
+| id | UUID als Primärschlüssel
+| status | Enum-Werte: `AKTIV`, `STORNIERT`, `ABGELAUFEN`
+| beginn / ende | Beide Zeitpunkte inklusive; keine Überschneidung per DB-Constraint
+| nutzer_id / raum_id | Fremdschlüssel; kein Cascade Delete — Buchungen bleiben erhalten
+
+| [Weitere Tabelle]
+| [Spalte]
+| [Beschreibung]
+|===
+
+=== Datenbankmigrationen
+
+_Schemaänderungen werden nicht manuell durchgeführt, sondern über Migrationsskripte
+versioniert. So ist der Datenbankzustand jederzeit reproduzierbar._
+
+[cols="1,3", options="header"]
+|===
+| Aspekt | Beschreibung
+
+| Werkzeug
+| [z. B. Flyway / Liquibase]
+
+| Speicherort
+| [z. B. `src/main/resources/db/migration/`]
+
+| Namenskonvention
+| [z. B. `V001__initiales_schema.sql`, `V002__buchung_status_spalte.sql`]
+
+| Regel
+| Bestehende Migrationsskripte werden *nie* verändert — nur neue hinzugefügt
+|===
+
+== Eingesetzte Muster & Konventionen
+
+_Dieser Abschnitt dokumentiert übergreifende Designmuster und Konventionen, die im
+gesamten Codebase gelten. Das verhindert, dass verschiedene Teammitglieder dasselbe
+Problem auf unterschiedliche Weise lösen._
+
+=== Designmuster
+
+[cols="1,2,2", options="header"]
+|===
+| Muster | Wo eingesetzt | Begründung
+
+| Repository Pattern
+| Persistenzschicht: alle Datenbankzugriffe
+| Datenbanklogik von Geschäftslogik trennen;
+  einfacher austauschbar und testbar
+
+| DTO (Data Transfer Object)
+| Schnittstelle zwischen Controller und Service
+| Interne Domänenobjekte nicht direkt exponieren;
+  API-Struktur unabhängig vom Datenbankmodell
+
+| Service Layer
+| Anwendungsschicht: alle Use Cases
+| Geschäftslogik zentralisieren;
+  Controller schlank halten
+
+| [Weiteres Muster]
+| [Wo eingesetzt]
+| [Begründung]
+|===
+
+=== Fehlerbehandlung
+
+[cols="1,3", options="header"]
+|===
+| Aspekt | Konvention
+
+| Fachliche Fehler
+| Als eigene Exception-Klassen modellieren
+  (z. B. `RaumNichtVerfuegbarException`, `BuchungNichtGefundenException`)
+
+| HTTP-Fehlercodes
+| 400 für Validierungsfehler; 404 für nicht gefundene Ressourcen;
+  409 für Konflikte; 500 nur für unerwartete Systemfehler
+
+| Fehlermeldungen
+| Immer strukturiert zurückgeben:
+  `{ "fehler": "...", "details": "..." }` — kein Stack Trace an den Client
+
+| Logging
+| Fachliche Fehler als WARN; unerwartete Fehler als ERROR;
+  keine personenbezogenen Daten in Log-Ausgaben (DSGVO)
+|===
+
+=== API-Konventionen
+
+[cols="1,3", options="header"]
+|===
+| Aspekt | Konvention
+
+| URL-Struktur
+| Ressourcenorientiert im Plural: `/buchungen`, `/raeume`, `/nutzer`
+
+| HTTP-Methoden
+| GET = lesen; POST = erstellen; PUT = ersetzen; PATCH = teilweise ändern;
+  DELETE = löschen
+
+| Antwortformat
+| JSON in allen Fällen; Datumsformat ISO 8601: `2024-06-01T09:00:00Z`
+
+| Versionierung
+| [z. B. URL-Präfix `/api/v1/` — Version nur erhöhen bei Breaking Changes]
+|===
+---
+
+_Diagramme in diesem Dokument sollten den aktuellen Stand des Codes widerspiegeln.
+Bei größeren Refactorings oder neuen Komponenten ist dieses Dokument im selben
+Pull Request zu aktualisieren._

@@ -1,0 +1,425 @@
+= Deployment & Betrieb: {project-name}
+Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vorname3 Nachname3 <email3@domain.org>
+{localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
+// Platzhalter für weitere Dokumenten-Attribute
+
+= 
+[Projektname]
+:toc:
+:toc-title: Inhalt
+:toclevels: 3
+
+_Dieses Dokument beschreibt, wie das System gebaut, ausgeliefert und betrieben wird —
+lokal, in der CI/CD-Pipeline und in den verschiedenen Umgebungen. Es richtet sich
+primär an Entwickler:innen und deckt alles ab, was nach dem Schreiben von Code passiert._
+
+_Technische Entscheidungen rund um Containerisierung und CI/CD (das *Warum*) sind
+als ADRs im Architekturdokument (`architecture.adoc`) dokumentiert.
+Dieses Dokument beschreibt das *Wie* und *Was*._
+
+---
+
+== Umgebungsübersicht
+
+_Das System wird in mehreren Umgebungen betrieben, die unterschiedliche Zwecke haben.
+Jede Umgebung ist vollständig isoliert — eine Änderung in einer Umgebung beeinflusst
+keine andere._
+
+[cols="1,1,2,1,1", options="header"]
+|===
+| Umgebung | URL | Zweck | Branch | Deployment
+
+| Lokal
+| http://localhost:8080
+| Entwicklung und manuelle Tests auf dem eigenen Rechner
+| Beliebig
+| Manuell (Docker Compose)
+
+| CI
+| —
+| Automatische Qualitätsprüfung bei jedem Push
+| Alle Branches
+| Automatisch (GitHub Actions)
+
+| Staging
+| [z. B. https://staging.example.com]
+| Integrationstest; Abnahme durch Product Owner vor Release
+| `main`
+| Automatisch nach Merge in `main`
+
+| Produktion
+| [z. B. https://example.com]
+| Live-System für Endnutzer:innen
+| `main` (getaggt)
+| Manuell mit Freigabe
+|===
+
+NOTE: In der Hochschulumgebung entfällt oft eine separate Produktionsumgebung.
+In diesem Fall dient Staging gleichzeitig als Produktionsumgebung.
+
+== Lokale Entwicklungsumgebung
+
+_Diese Anleitung richtet sich an neue Teammitglieder, die das System zum ersten
+Mal lokal zum Laufen bringen wollen._
+
+=== Voraussetzungen
+
+[cols="1,1,2", options="header"]
+|===
+| Werkzeug | Version | Installationshinweis
+
+| Docker
+| ≥ 24.0
+| https://docs.docker.com/get-docker/
+
+| Docker Compose
+| ≥ 2.0
+| Wird mit Docker Desktop mitgeliefert
+
+| [z. B. Node.js]
+| [z. B. ≥ 20 LTS]
+| [z. B. https://nodejs.org — oder via `nvm`]
+
+| [z. B. Java JDK]
+| [z. B. ≥ 21]
+| [z. B. https://adoptium.net]
+
+| Git
+| Aktuell
+| https://git-scm.com
+|===
+
+=== System lokal starten
+
+[source,bash]
+----
+# 1. Repository klonen
+git clone [Repository-URL]
+cd [projektname]
+
+# 2. Umgebungsvariablen konfigurieren
+cp .env.example .env
+# .env mit einem Editor öffnen und ggf. anpassen
+
+# 3. Alle Dienste starten
+docker compose up --build
+
+# 4. Prüfen, ob alles läuft
+# Frontend:  http://localhost:3000
+# Backend:   http://localhost:8080
+# API-Docs:  http://localhost:8080/swagger-ui
+----
+
+=== System stoppen und aufräumen
+
+[source,bash]
+----
+# Dienste stoppen (Daten bleiben erhalten)
+docker compose down
+
+# Dienste stoppen und Volumes löschen (Datenbank wird geleert)
+docker compose down -v
+----
+
+=== Häufige Probleme beim lokalen Start
+
+[cols="2,3", options="header"]
+|===
+| Problem | Lösung
+
+| Port bereits belegt (`address already in use`)
+| `docker compose down` ausführen oder belegten Port prüfen:
+  `lsof -i :8080` (macOS/Linux) bzw. `netstat -ano` (Windows)
+
+| Datenbank-Container startet nicht
+| Volumes löschen und neu starten: `docker compose down -v && docker compose up`
+
+| Umgebungsvariablen fehlen
+| Prüfen ob `.env`-Datei vorhanden ist; Beispielwerte in `.env.example` ansehen
+
+| [Weiteres Problem]
+| [Lösung]
+|===
+
+
+== Docker & Container
+
+_Dieser Abschnitt beschreibt, wie das System containerisiert ist — welche Container
+existieren, wie sie konfiguriert werden, und wie sie zusammenarbeiten._
+
+=== Container-Übersicht
+
+[cols="1,1,2,1", options="header"]
+|===
+| Service | Image | Zweck | Port (intern → extern)
+
+| [z. B. frontend]
+| [z. B. node:20-alpine (Build-Image)]
+| React-Anwendung — wird als statische Dateien gebaut und über nginx ausgeliefert
+| 80 → 3000
+
+| [z. B. backend]
+| [z. B. eclipse-temurin:21-jre-alpine]
+| Spring Boot REST-API
+| 8080 → 8080
+
+| [z. B. db]
+| [z. B. postgres:15-alpine]
+| PostgreSQL-Datenbank
+| 5432 → 5432
+
+| [z. B. mailhog]
+| [z. B. mailhog/mailhog]
+| E-Mail-Testserver (nur lokal); fängt alle ausgehenden E-Mails ab
+| 1025 (SMTP), 8025 (UI) → 8025
+|===
+
+=== Umgebungsvariablen
+
+_Alle Konfiguration erfolgt über Umgebungsvariablen — keine hartkodierten Werte
+im Code. Eine vollständige Liste mit Beispielwerten befindet sich in `.env.example`._
+
+[cols="1,1,2,1", options="header"]
+|===
+| Variable | Beispielwert | Beschreibung | Pflicht
+
+| `DATABASE_URL`
+| `jdbc:postgresql://db:5432/projektname`
+| Verbindungs-URL zur Datenbank
+| Ja
+
+| `DATABASE_USER`
+| `projektname`
+| Datenbankbenutzername
+| Ja
+
+| `DATABASE_PASSWORD`
+| `[sicheres Passwort]`
+| Datenbankpasswort — nie im Repository speichern
+| Ja
+
+| `JWT_SECRET`
+| `[min. 32 Zeichen]`
+| Geheimnis für JWT-Token-Signierung
+| Ja
+
+| `SMTP_HOST`
+| `mailhog` (lokal) / `smtp.example.com` (prod)
+| E-Mail-Serveradresse
+| Ja
+
+| `LOG_LEVEL`
+| `INFO`
+| Log-Level: DEBUG / INFO / WARN / ERROR
+| Nein (Standard: INFO)
+
+| [Weitere Variable]
+| [Beispielwert]
+| [Beschreibung]
+| [Ja / Nein]
+|===
+
+IMPORTANT: Produktions-Secrets (Passwörter, API-Keys, JWT-Secrets) werden *nie*
+im Repository gespeichert — auch nicht in `.env`-Dateien. Sie werden ausschließlich
+als CI/CD-Secrets oder über einen Secret-Manager verwaltet.
+
+---
+
+== CI/CD-Pipeline
+
+_Die Pipeline automatisiert Qualitätsprüfung und Deployment. Sie stellt sicher,
+dass kein Code in `main` gelangt, der Tests bricht oder Qualitätsstandards verletzt._
+
+=== Pipeline-Schritte im Detail
+
+[cols="1,2,1,1", options="header"]
+|===
+| Schritt | Beschreibung | Schlägt fehl bei | Ausgeführt bei
+
+| Linting
+| Code-Stil und statische Analyse prüfen
+| Stilfehler oder Warnungen über Schwellwert
+| Jedem Push
+
+| Unit-Tests
+| Alle Unit-Tests ausführen
+| Fehlschlagende Tests
+| Jedem Push
+
+| Integrationstests
+| Tests gegen echte Datenbank (Testcontainers)
+| Fehlschlagende Tests
+| Jedem Push
+
+| Abdeckungsprüfung
+| Testabdeckung messen und mit Mindestwert vergleichen
+| Unterschreitung des Mindestwerts (siehe Testkonzept)
+| Jedem Push
+
+| Image-Build
+| Docker-Images für alle Services bauen
+| Build-Fehler
+| Jedem Push auf `main` und PRs
+
+| Staging-Deployment
+| Neue Images auf Staging-Umgebung ausrollen
+| Deployment-Fehler oder fehlschlagende Smoke Tests
+| Merge in `main`
+
+| Produktions-Deployment
+| Neues Release auf Produktion ausrollen
+| Deployment-Fehler oder fehlschlagende Smoke Tests
+| Manuell nach Tag-Erstellung
+|===
+
+=== Pipeline-Konfiguration
+
+Die vollständige Pipeline-Konfiguration befindet sich in:
+
+[source]
+----
+.github/workflows/
+├── ci.yml          ← Qualitätsprüfung (bei jedem Push)
+└── deploy.yml      ← Deployment (Staging & Produktion)
+----
+
+
+== Deployment-Ablauf
+
+=== Deployment auf Staging (automatisch)
+
+Jeder Merge in `main` löst automatisch ein Deployment auf Staging aus.
+Kein manueller Eingriff erforderlich.
+
+. Pipeline baut neue Docker Images
+. Images werden in die Container-Registry gepusht
+. Staging-Umgebung zieht die neuen Images
+. Smoke Tests werden automatisch ausgeführt
+. Team wird bei Erfolg oder Fehler benachrichtigt
+
+=== Release und Deployment auf Produktion (manuell)
+
+[source,bash]
+----
+# 1. Sicherstellen, dass main aktuell und stabil ist
+git checkout main
+git pull
+
+# 2. Release-Tag erstellen (Semantic Versioning)
+git tag v1.2.0
+git push --tags
+
+# 3. In GitHub Actions: Produktions-Deployment manuell freigeben
+# → GitHub → Actions → deploy.yml → "Run workflow" → Version bestätigen
+----
+
+NOTE: Semantic Versioning: MAJOR.MINOR.PATCH —
+MAJOR bei inkompatiblen Änderungen,
+MINOR bei neuen Features (abwärtskompatibel),
+PATCH bei Bugfixes.
+
+=== Smoke Tests nach Deployment
+
+Nach jedem Deployment werden folgende Prüfungen ausgeführt:
+
+[cols="2,2", options="header"]
+|===
+| Prüfung | Erwartetes Ergebnis
+
+| `GET /actuator/health` (Backend)
+| HTTP 200, Status `UP`
+
+| Startseite laden (Frontend)
+| HTTP 200, Ladezeit < 3 s
+
+| Login-Flow
+| Erfolgreicher Login mit Testnutzer möglich
+
+| [Kernfunktion prüfen]
+| [Erwartetes Ergebnis]
+|===
+
+== Rollback
+
+_Ein Rollback ist notwendig, wenn ein Deployment kritische Fehler in der
+Produktionsumgebung verursacht. Schnelles Handeln minimiert die Auswirkungen._
+
+=== Wann wird ein Rollback durchgeführt?
+
+* Kritische Fehler in Produktion nach einem Deployment
+* Smoke Tests schlagen nach Deployment fehl
+* Fehlerrate oder Antwortzeiten steigen signifikant an
+
+=== Rollback-Ablauf
+
+. *Entscheidung treffen* — Tech Lead oder Product Owner entscheiden über Rollback
+. *Stakeholder informieren* — Team und relevante Stakeholder benachrichtigen
+. *Rollback ausführen* (eine von zwei Optionen):
+
+[source,bash]
+----
+# Option A: Letztes stabiles Tag erneut deployen
+# → GitHub → Actions → deploy.yml → Version des letzten stabilen Tags eingeben
+
+# Option B: Manuell das vorherige Image aktivieren
+docker compose pull [service]:[vorherige-version]
+docker compose up -d [service]
+----
+
+[start=4]
+. *Smoke Tests ausführen* — sicherstellen dass das System wieder stabil ist
+. *Ursache analysieren* — was hat das Problem verursacht?
+. *Nachbereitung dokumentieren* — im Ticket oder als Kommentar im ADR
+
+== Monitoring & Logging
+
+_Dieser Abschnitt beschreibt, wie der Zustand des Systems beobachtet und wie
+Fehler diagnostiziert werden können._
+
+=== Health Checks
+
+[cols="1,2,1", options="header"]
+|===
+| Endpunkt | Beschreibung | Erwartet
+
+| `GET /actuator/health`
+| Gesamtstatus des Systems inkl. Datenbankverbindung
+| HTTP 200, `{"status": "UP"}`
+
+| `GET /actuator/info`
+| Version und Build-Informationen
+| HTTP 200
+
+| [Weiterer Endpunkt]
+| [Beschreibung]
+| [Erwartetes Ergebnis]
+|===
+
+=== Logs
+
+[cols="1,3", options="header"]
+|===
+| Aspekt | Beschreibung
+
+| Log-Format
+| Strukturiertes JSON-Logging; enthält Zeitstempel, Level, Service, Message
+
+| Log-Zugriff (lokal)
+| `docker compose logs -f [service]`
+
+| Log-Zugriff (Staging/Prod)
+| [z. B. `ssh user@server` → `journalctl -u [service]` oder Logging-Dashboard-URL]
+
+| Was geloggt wird
+| Alle Fehler (ERROR), Warnungen (WARN), wichtige Geschäftsereignisse (INFO)
+
+| Was *nicht* geloggt wird
+| Passwörter, Tokens, personenbezogene Daten (DSGVO-Anforderung)
+|===
+
+---
+
+_Dieses Dokument ist ein lebendes Dokument. Änderungen an der Pipeline,
+den Umgebungen oder dem Deployment-Prozess sind hier im selben Pull Request
+zu dokumentieren, in dem die technische Änderung vorgenommen wird._

@@ -1,0 +1,145 @@
+= Teamcharta: {project-name}
+Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vorname3 Nachname3 <email3@domain.org>
+{localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
+:version: 1.0
+
+
+== Zweck
+
+*Was bauen wir, und warum?*
+
+[Hier die Produktvision und den Projektzweck in 2–3 Sätzen beschreiben.]
+
+== Rollen
+
+[cols="1,2", options="header"]
+|===
+| Rolle | Person
+
+| Product Owner
+| [Name]
+
+| Scrum Master
+| [Name]
+
+| Tech Lead
+| [Name]
+
+| Entwickler:innen
+| [Namen]
+
+| Stakeholder (Hauptansprechpartner)
+| [Name]
+|===
+
+== Meetings
+
+[cols="2,1,1,2", options="header"]
+|===
+| Zeremonie | Wann | Dauer | Moderation
+
+| Standup (Daily / Weekly)
+| [z. B. täglich 09:30]
+| [z. B. 15 min]
+| [Rolle / Person]
+
+| Sprint Planning
+| [z. B. montags, Sprintstart]
+| [z. B. 2 h]
+| [Rolle / Person]
+
+| Sprint Review
+| [z. B. freitags, Sprintende]
+| [z. B. 1 h]
+| [Rolle / Person]
+
+| Retrospektive
+| [z. B. freitags, nach Review]
+| [z. B. 1 h]
+| [Rolle / Person]
+
+| Backlog Refinement
+| [z. B. mittwochs, wöchentlich]
+| [z. B. 1 h]
+| [Rolle / Person]
+|===
+
+== Kommunikation
+
+[cols="1,2", options="header"]
+|===
+| Thema | Vereinbarung
+
+| Primärer Kanal
+| [z. B. Slack – #projektname]
+
+| Entscheidungsprotokoll
+| [z. B. Confluence-Seite „Entscheidungen"]
+
+| Erwartete Reaktionszeit
+| [z. B. innerhalb von 4 Stunden während Kernzeit]
+
+| Kernarbeitszeit
+| [z. B. 09:00 – 16:00 Uhr]
+
+| Videokonferenz-Tool
+| [z. B. Teams / Zoom / Google Meet]
+
+| Asynchrone Abstimmung
+| [z. B. kurze Statusupdates im Ticket-Kommentar]
+|===
+
+== Arbeitsweise
+
+=== Definition of Ready (DoR)
+_Eine User Story ist bereit für die Entwicklung, wenn:_
+
+* [ ] Die Akzeptanzkriterien sind klar und vollständig beschrieben
+* [ ] Der Aufwand wurde vom Team geschätzt
+* [ ] Abhängigkeiten sind identifiziert und geklärt
+* [ ] Designs / Mockups sind vorhanden (falls relevant)
+* [ ] [Weitere Kriterien ergänzen]
+
+=== Definition of Done (DoD)
+_Eine User Story gilt als fertig, wenn:_
+
+* [ ] Der Code wurde implementiert und in den Hauptbranch gemergt
+* [ ] Unit- und Integrationstests wurden geschrieben und sind grün
+* [ ] Der Code wurde von mindestens einer weiteren Person reviewt
+* [ ] Die Funktionalität wurde im Staging-System getestet
+* [ ] Dokumentation wurde aktualisiert (falls erforderlich)
+* [ ] Der Product Owner hat die Story abgenommen
+* [ ] [Weitere Kriterien ergänzen]
+
+=== Code & Versionierung
+
+[cols="1,2", options="header"]
+|===
+| Thema | Vereinbarung
+
+| Branching-Strategie
+| [z. B. Feature Branches, Trunk-Based Development]
+
+| PR-Review-Regeln
+| [z. B. mind. 1 Approval, kein Merge ohne grüne Pipeline]
+
+| Merge-Berechtigung
+| [z. B. jedes Teammitglied nach Approval]
+
+| Commit-Konventionen
+| [z. B. Conventional Commits]
+|===
+
+== Teamvereinbarungen
+
+_Diese Vereinbarungen haben wir gemeinsam getroffen:_
+
+. [z. B. Wir gehen respektvoll und offen miteinander um.]
+. [z. B. Wir sprechen Probleme frühzeitig an, anstatt sie zu ignorieren.]
+. [z. B. Fehler sind Lernchancen – wir suchen keine Schuldigen.]
+. [z. B. Meetings beginnen pünktlich; wer verhindert ist, gibt rechtzeitig Bescheid.]
+. [z. B. Entscheidungen werden dort dokumentiert, wo alle sie finden können.]
+
+
+_Nächste Überprüfung: [Datum / Sprint] — Diese Charta wird regelmäßig in der Retrospektive aktualisiert._

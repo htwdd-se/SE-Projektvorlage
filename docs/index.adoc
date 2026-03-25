@@ -1,0 +1,30 @@
+= Dokumentation im Überblick
+
+Die Dokumentation in diesem Repository enthält grundlegende und systemweite bzw. projektweite Festlegungen. Angaben, die sich auf konkrete Funktionen und Aufgaben beziehen, werden im Product Backlog bzw. Sprint Backlog verwaltet.
+
+Die Dokumentation folgt dem https://docs-as-co.de/[*Docs-as-Code*]-Ansatz, in dem leichtgewichtige Markdown-Dokumente in einem Repository genauso behandelt werden wie Code.
+
+Die Dokumentation in diesem Repository ist wie folgt aufgebaut:
+
+== Produkt
+Was wir entwickeln und für wen (`docs/product`).
+
+* link:product/product_concept.adoc[Produktkonzept] beschreibt das Produkt und die Motivation für seine Entwicklung.
+* link:product/ux_concept.adoc[UX-Konzept] gibt Details für die Gestaltung der Benutzeroberfläche auf Basis von Nutzerkontext und Personas als Ergänzung zu User Stories.
+* link:product/domain_glossary.adoc[Fachbegriffe und Domänenmodell] beschreibt Begriffe der Fachdomäne und ihre Zusammenhänge.
+
+== Team
+Wie wir zusammenarbeiten (`docs/team`).
+
+* link:team/teamcharter.adoc[Teamcharta] enthält Verantwortlichkeiten und Regeln für die Zusammenarbeit.
+
+== Technik 
+Wie das Produkt entwickelt und betrieben wird (`docs/technical`).
+
+* link:technical/architecture.adoc[Architektur] enthält grundlegende Entscheidungen zur technischen Grundlage und Struktur des Systems.
+* link:technical/design.adoc[Softwaredesign] beschreibt den Aufbau der Codebasis, den Aufbau und Zusammenspiel zentraler Komponenten und Schnittstellen.
+* link:technical/deployment.adoc[Bereitstellung] enthält Informationen zur Betriebsumgebung, ihrer Konfiguration sowie Schritten zur Auslieferung (CI/CD).
+* link:technical/test_concept.adoc[Testkonzept] beschreibt das gewählte Testkonzept, Tools und die Einbindung in den Entwicklungsprozess. 
+
+---
+_Dieses Dokument wird kontinuierlich gepflegt. Zusätzliche Dokumente können in den drei Kategorien bei Bedarf ergänzt und auf dieser Seite verlinkt werden._

@@ -1,0 +1,257 @@
+= Testkonzept: {project-name}
+Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vorname3 Nachname3 <email3@domain.org>
+{localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
+// Platzhalter für weitere Dokumenten-Attribute
+
+_Dieses Dokument beschreibt, wie die Qualität der Software sichergestellt wird.
+Es legt fest, welche Arten von Tests eingesetzt werden, welche Werkzeuge verwendet werden,
+und wie Tests in den Entwicklungsprozess integriert sind._
+
+---
+
+== Teststrategie
+
+_Beschreibe in wenigen Sätzen den grundsätzlichen Ansatz zur Qualitätssicherung im Projekt.
+Warum wurden diese Testarten gewählt? Welchen Stellenwert hat Testing im Team?_
+
+[Hier die übergeordnete Teststrategie beschreiben, z. B.:
+„Wir setzen auf eine Teststrategie mit einem starken Fokus auf Unit-Tests,
+ergänzt durch Integrationstests für kritische Schnittstellen und manuelle Tests für die wichtigsten Nutzerinteraktionen."]
+
+== Testarten
+
+=== Unit-Tests
+
+Unit-Tests prüfen einzelne Klassen oder Funktionen isoliert voneinander.
+
+[cols="1,3", options="header"]
+|===
+| Aspekt | Beschreibung
+
+| Ziel
+| Sicherstellung der korrekten Funktionsweise einzelner Komponenten in Isolation
+
+| Umfang
+| Alle Service- und Domänenklassen; Fokus auf Geschäftslogik
+
+| Werkzeug
+| [z. B. JUnit 5, Pytest, Jest]
+
+| Mocking
+| [z. B. Mockito, unittest.mock — externe Abhängigkeiten werden gemockt]
+
+| Abdeckungsziel
+| [z. B. mind. 80 % Zeilenabdeckung auf der Service-Schicht]
+
+| Ausführung
+| Lokal bei jedem Build; automatisch in der CI-Pipeline bei jedem Push
+|===
+
+=== Integrationstests
+
+Integrationstests prüfen das Zusammenspiel mehrerer Komponenten, z. B. Service und Datenbank.
+
+[cols="1,3", options="header"]
+|===
+| Aspekt | Beschreibung
+
+| Ziel
+| Sicherstellung der korrekten Kommunikation zwischen Komponenten und mit externen Systemen
+
+| Umfang
+| [z. B. REST-Endpunkte, Datenbankzugriffe, externe API-Aufrufe]
+
+| Werkzeug
+| [z. B. Spring Boot Test, Testcontainers, Supertest]
+
+| Testdaten
+| [z. B. dedizierte Testdatenbank, In-Memory-Datenbank, Fixtures]
+
+| Ausführung
+| Automatisch in der CI-Pipeline; nicht zwingend bei jedem lokalen Build
+|===
+
+=== Optional: End-to-End-Tests (E2E)
+
+E2E-Tests simulieren echte Nutzerinteraktionen durch die gesamte Anwendung.
+
+//E2E-Tests sind optional und sollten erst betrachtet werden, wenn alle anderen Testarten ausreichend berücksichtigt wurden.
+
+[cols="1,3", options="header"]
+|===
+| Aspekt | Beschreibung
+
+| Ziel
+| Sicherstellung der wichtigsten Interaktionen aus Endnutzerperspektive
+
+| Umfang
+| [z. B. Login, Kernfunktion A, Kernfunktion B — nur kritische Pfade]
+
+| Werkzeug
+| [z. B. Cypress, Playwright, Selenium]
+
+| Ausführung
+| [z. B. manuell vor jedem Release; oder automatisch auf Staging-Umgebung]
+|===
+
+=== Manuelle Tests
+
+Hier werden alle Tests aufgeführt, die nicht automatisiert werden können.
+
+[cols="1,3", options="header"]
+|===
+| Aspekt | Beschreibung
+
+| Ziel
+| Überprüfung von Usability, visueller Korrektheit und explorativem Testen
+
+| Umfang
+| [z. B. UI-Design, Responsivität, neue Features vor dem Sprint Review]
+
+| Vorgehen
+| [z. B. Exploratives Testen durch Teammitglied, das das Feature nicht implementiert hat]
+
+| Dokumentation
+| [z. B. Testergebnisse als Kommentar in GitIssue]
+|===
+
+== Nicht getestet
+
+Es ist genauso wichtig zu dokumentieren, was bewusst NICHT getestet wird — und warum. Das verhindert Missverständnisse und zeigt, dass die Entscheidung bewusst getroffen wurde.
+
+[cols="2,3", options="header"]
+|===
+| Bereich | Begründung
+
+| [z. B. Infrastruktur-Code (Docker, CI-Konfiguration)]
+| [z. B. Zu aufwändig für den Projektumfang; wird durch manuelle Überprüfung abgedeckt]
+
+| [z. B. Drittanbieter-Bibliotheken]
+| [z. B. Vertrauen in externe Qualitätssicherung der Bibliothek]
+
+| [Weiterer Bereich]
+| [Begründung]
+|===
+
+== Werkzeuge & Frameworks
+
+[cols="1,2,2", options="header"]
+|===
+| Werkzeug | Zweck | Dokumentation
+
+| [z. B. JUnit 5]
+| Unit- und Integrationstests (Backend)
+| https://junit.org/junit5/
+
+| [z. B. Mockito]
+| Mocking von Abhängigkeiten in Unit-Tests
+| https://site.mockito.org/
+
+| [z. B. Testcontainers]
+| Datenbankintegrationstests mit echtem Container
+| https://testcontainers.com/
+
+| [z. B. Cypress]
+| End-to-End-Tests im Browser
+| https://www.cypress.io/
+
+| [z. B. JaCoCo]
+| Messung der Testabdeckung
+| https://www.jacoco.org/
+|===
+
+== Testabdeckung
+
+_Definiert die angestrebten Mindestwerte für die Testabdeckung._
+
+[cols="1,1,2", options="header"]
+|===
+| Schicht | Zielwert | Bemerkung
+
+| Service-Schicht
+| [z. B. ≥ 80 %]
+| Geschäftslogik hat höchste Priorität
+
+| Persistenz-Schicht
+| [z. B. ≥ 60 %]
+| Grundlegende CRUD-Operationen abgedeckt
+
+| Controller / API
+| [z. B. ≥ 70 %]
+| Wichtigste Endpunkte per Integrationstest abgedeckt
+
+| Frontend-Komponenten
+| [z. B. ≥ 50 %]
+| Fokus auf wiederverwendbare Kernkomponenten
+|===
+
+NOTE: Abdeckung ist kein Selbstzweck. 80 % sinnlose Tests sind schlechter als 60 % gut durchdachte Tests. Qualität der Tests ist wichtiger als der Prozentwert.
+
+== Integration in den Entwicklungsprozess
+
+=== Lokal (Entwicklermaschine)
+
+[source,bash]
+----
+# Alle Unit-Tests ausführen
+[z. B.  pytest  |  npm test]
+
+# Testabdeckung prüfen
+[z. B.  pytest --cov]
+----
+
+=== CI-Pipeline
+
+_Tests werden automatisch bei jedem Push ausgeführt._
+
+[cols="1,2,1", options="header"]
+|===
+| Schritt | Beschreibung | Schlägt fehl bei
+
+| Unit-Tests
+| Alle Unit-Tests werden ausgeführt
+| Fehlerhafte Tests
+
+| Integrationstests
+| Integrationstests gegen Testdatenbank
+| Fehlerhafte Tests oder Verbindungsproblem
+
+| Abdeckungsprüfung
+| Testabdeckung wird gemessen
+| Unterschreitung des Mindestwerts
+
+| E2E-Tests
+| [Falls automatisiert: Ausführung auf Staging]
+| Fehlerhafte kritische Nutzerflüsse
+|===
+
+=== Definition of Done
+
+//Bitte anpassen und nur das aufnehmen, was tatsächlich auch durchgeführt wird.
+Folgende Testkriterien sind Teil unserer Definition of Done:
+
+* [ ] Alle bestehenden Tests sind grün
+* [ ] Neue Funktionalität ist durch Unit-Tests abgedeckt
+* [ ] Die Mindest-Testabdeckung wird nicht unterschritten
+* [ ] Manuelle Tests für neue Features wurden durchgeführt
+* [ ] Keine bekannten kritischen Fehler sind offen
+
+== Fehlerbehandlung & Bugtracking
+
+[cols="1,3", options="header"]
+|===
+| Aspekt | Beschreibung
+
+| Wo werden Bugs erfasst?
+| [z. B. Als Issue mit Label "Bug" in GitHub Issues]
+
+| Priorisierung
+| [z. B. kritische Bugs werden sofort im laufenden Sprint behoben; andere ins Backlog]
+
+| Reproduzierbarkeit
+| [z. B. Jeder Bug-Report enthält Schritte zur Reproduktion, erwartetes und tatsächliches Verhalten]
+|===
+
+_Dieses Testkonzept wird bei Bedarf aktualisiert — insbesondere wenn neue Testarten eingeführt,
+Werkzeuge gewechselt oder Abdeckungsziele angepasst werden._
