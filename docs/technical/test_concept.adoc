@@ -38,7 +38,7 @@ Unit-Tests prüfen einzelne Klassen oder Funktionen isoliert voneinander.
 | Werkzeug
 | [z. B. JUnit 5, Pytest, Jest]
 
-| Mocking
+| Mocking (Faken / Simulieren)
 | [z. B. Mockito, unittest.mock — externe Abhängigkeiten werden gemockt]
 
 | Abdeckungsziel
@@ -190,8 +190,8 @@ NOTE: Abdeckung ist kein Selbstzweck. 80 % sinnlose Tests sind schlechter als 60
 
 == Integration in den Entwicklungsprozess
 
-=== Lokal (Entwicklermaschine)
-
+=== Ausführung der Tests
+==== Lokale Entwicklung
 [source,bash]
 ----
 # Alle Unit-Tests ausführen
@@ -201,30 +201,9 @@ NOTE: Abdeckung ist kein Selbstzweck. 80 % sinnlose Tests sind schlechter als 60
 [z. B.  pytest --cov]
 ----
 
-=== CI-Pipeline
+==== CI-Pipeline
 
-_Tests werden automatisch bei jedem Push ausgeführt._
-
-[cols="1,2,1", options="header"]
-|===
-| Schritt | Beschreibung | Schlägt fehl bei
-
-| Unit-Tests
-| Alle Unit-Tests werden ausgeführt
-| Fehlerhafte Tests
-
-| Integrationstests
-| Integrationstests gegen Testdatenbank
-| Fehlerhafte Tests oder Verbindungsproblem
-
-| Abdeckungsprüfung
-| Testabdeckung wird gemessen
-| Unterschreitung des Mindestwerts
-
-| E2E-Tests
-| [Falls automatisiert: Ausführung auf Staging]
-| Fehlerhafte kritische Nutzerflüsse
-|===
+Tests werden automatisch bei jedem Push im Repository ausgeführt. Je nach Testart können unterschiedliche Trigger und Umgebungen sinnvoll sein. Die Konfiguration der CI-Pipeline sollte sicherstellen, dass alle Tests zuverlässig und schnell ausgeführt werden.
 
 === Definition of Done
 
