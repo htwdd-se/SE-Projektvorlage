@@ -27,58 +27,67 @@ include::{docs}/_includes/default-attributes.inc.adoc[]
 :experimental:
 // Folders
 :imagesdir-reset: {imagesdir}
-:docs-test2: {docs}/test2
-:docs-requirements: {docs}/requirements
-:docs-project-management: {docs}/project_management
-:docs-architecture: {docs}/architecture
-:docs-test: {docs}/test
-:docs-development: {docs}/development
+:docs-team: {docs}/team
+:docs-product: {docs}/product
+:docs-technical: {docs}/technical
 
 <<<
 
 // --- 4. include Pfade anpassen ---------------
 
 // --- Projektdokumentation ---
-= Projektdokumentation
-* Projektplan
+= Teamspezifikation
+* Teamcharta
 
-:imagesdir: {docs-project-management}/images
+:imagesdir: {docs-team}/images
 
-// Projektplan
-include::{docs-project-management}/project_plan.adoc[lines=1..1;4..-1,leveloffset=+1]
+// Teamcharta
+include::{docs-team}/teamcharter.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
 
-// --- Technische Spezifikation ---
-= Technische Spezifikation
-* Produktvision
-* Glossar und Domänenmodel
+// ---------------------------------------------
+
+= Produktspezifikation
+* Produktkonzept
+* Domänenmodell und Glossar
 * UX-Konzept
 
-:imagesdir: {docs-requirements}/images
+:imagesdir: {docs-technical}/images
 
-// Produktvision
-include::{docs-requirements}/vision.adoc[lines=1..1;4..-1,leveloffset=+1]
+// Produktkonzept
+include::{docs-product}/product_concept.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
-// Glossar und Domänenmodell
+// Domänenmodell und Glossar
 [#glossary]
-include::{docs-requirements}/glossary.adoc[lines=1..1;4..-1,leveloffset=+1]
+include::{docs-product}/domain_glossary.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
 // UX-Konzept
-include::{docs-requirements}/ux-concept.adoc[lines=1..1;4..-1,leveloffset=+1]
+include::{docs-product}/ux_concept.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
 
-// --- Entwurfsdokumentation ---
-= Entwurfsdokumentation
-* Architektur-Notizbuch
-* Test Cases
+// ---------------------------------------------
 
-// Architektur-Notizbuch
-:imagesdir: {docs-architecture}/images
-include::{docs-architecture}/architecture_notebook.adoc[lines=1..1;4..-1,leveloffset=+1]
+= Technische Spezifikation
+* Architekturdokument
+* Softwaredesign
+* Testkonzept
+* Deployment & Betrieb
+
+// Architekturdokument
+:imagesdir: {docs-product}/images
+include::{docs-technical}/architecture.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
-// Test Cases
+// Softwaredesign
 :imagesdir: {docs-test}/images
-include::{docs-test}/test_cases.adoc[lines=1..1;4..-1,leveloffset=+1]
+include::{docs-technical}/design.adoc[lines=1..1;4..-1,leveloffset=+1]
+<<<
+// Testkonzept
+:imagesdir: {docs-test}/images
+include::{docs-technical}/test_concept.adoc[lines=1..1;4..-1,leveloffset=+1]
+<<<
+// Deployment & Betrieb
+:imagesdir: {docs-test}/images
+include::{docs-technical}/deployment.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
 
 // ---------------------------------------------
