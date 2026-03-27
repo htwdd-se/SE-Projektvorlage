@@ -1,5 +1,5 @@
 // Meta
-:project-name: Projektthema (T00)
+:project-name: Projektthema (X0)
 :project-system-name: Software-Name
 // Settings:
 :toc:

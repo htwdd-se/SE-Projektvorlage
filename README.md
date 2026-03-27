@@ -1,12 +1,12 @@
 # Vorlage Projektstruktur & Dokumente
 
 Das Repository enthält die Vorlage einer Projektstruktur und Template-Dokumente
-im AsciiDoc-Format. Dies wird für die Bearbeitung der Belegarbeit in Software
-Engineering I und II benötigt. Im Detail sind das:
+im AsciiDoc-Format. Dies wird für die Bearbeitung der Projektdokumentation in
+Software Engineering I und II benötigt. Im Detail sind das:
 
 - Projektstruktur für Code und Dokumente
 - Templates der benötigten Dokumente (AsciiDoc-Format)
-- Vorlage für die Belegabgabe in SE I (AsciiDoc-Format)
+- Vorlage für die Abgabe in SE I (AsciiDoc-Format)
 
 > [!NOTE]
 > Dieses Repository enthält keinen Code.
@@ -21,8 +21,8 @@ Engineering I und II benötigt. Im Detail sind das:
 ## Projektstruktur
 
 Die Projektstruktur im Verzeichnis **docs** orientiert sich an den wesentlichen
-Aspekten im Software Engineering und den für die <ins>Abgabe im SE
-1 Beleg</ins> geforderten Dokumenten.
+Aspekten im Software Engineering und den für die <ins>Abgabe im SE 1</ins>
+geforderten Dokumenten.
 
 ```text
 docs
@@ -65,16 +65,16 @@ und der **Systemname** als Attribute global definiert. Diese können über
 `{project-name}` und `{project-system-name}` in der Dokumentation an beliebiger
 Stelle verwendet werden.
 
-- **Projektname** `:project-name:`: Enthält das Belegthema inklusive der Projekt-ID
+- **Projektname** `:project-name:`: Enthält das Projektthema inklusive der Projekt-ID
 - **Systemname** `:project-system-name:`: Enthält den Systemnamen der Software
 
 ```asciidoc
 // Meta
-:project-name: <Projektname (T00)>
+:project-name: <Projektname (X0)>
 :project-system-name: <Projektname-System>
 ```
 
-- `T` ... steht als Platzhalter für das Teamkürzel
+- `X0` ... steht als Platzhalter für die Projekt-ID (bspw. A1, B2)
 - `<Platzhalter>` ... die Platzhalter inkl. der `<` und `>` ersetzen
 
 ### Bilder und Diagramme einbinden
@@ -84,7 +84,6 @@ In dem Dokumentenattribut `:imagesdir: images` ist das Standardverzeichnis
 Dokumenten, die Bilder ohne Angabe des **images** Verzeichnis einzubinden:
 
 ```asciidoc
-// vision.adoc
 image::example.jpg[Beispielbild]
 ```
 
@@ -102,14 +101,14 @@ product
 ├── plantuml
 │   └── diagram.puml
 ├── ...
-└── vision.adoc
+└── ux_concept.adoc
 ```
 
 ## Lizenz
 
 ### Dokumentation
 
-Die Templates im Ordner `docs` und `belegabgabe_se1` unterliegen der
+Die Templates im Ordner `docs` und `abgabe_se1` unterliegen der
 [CC-BY-4.0](https://choosealicense.com/licenses/cc-by-4.0/) Lizenz.
 
 ### Quellcode / Anderes
