@@ -1,0 +1,26 @@
+blank_issues_enabled: false
+
+# HINWEIS: Ersetze [ORG] und [REPO] durch den tatsächlichen GitHub-Organisationsnamen
+# und Repository-Namen, bevor dieses Projekt produktiv genutzt wird.
+# Beispiel: https://github.com/meine-hochschule/raumbuchung/blob/main/docs/...
+
+contact_links:
+  - name: 📋 Produktkonzept
+    url: https://github.com/[ORG]/[REPO]/blob/main/docs/product/product_concept.adoc
+    about: Vision, Hauptfunktionen, Qualitätsziele und Einschränkungen — Pflichtlektüre vor dem Schreiben von Stories
+
+  - name: 👤 UX-Konzept & Personas
+    url: https://github.com/[ORG]/[REPO]/blob/main/docs/product/ux_concept.adoc
+    about: Personas und Nutzungskontext — hilfreich beim Formulieren des "Als ... möchte ich ..."
+
+  - name: 📖 Domänenmodell & Glossar
+    url: https://github.com/[ORG]/[REPO]/blob/main/docs/product/domain_glossary.adoc
+    about: Fachliche Begriffe — vor dem Erstellen von Stories konsultieren, um einheitliche Sprache sicherzustellen
+
+  - name: ✅ Team-Charta & Definition of Ready / Done
+    url: https://github.com/[ORG]/[REPO]/blob/main/docs/team/team_charter.adoc
+    about: Unsere Arbeitsvereinbarungen — inkl. Definition of Ready und Definition of Done
+
+  - name: 🏗️ Architekturdokument & ADRs
+    url: https://github.com/[ORG]/[REPO]/blob/main/docs/technical/architecture.adoc
+    about: Architekturentscheidungen — Pflichtlektüre vor dem Erstellen Technischer Stories und Spikes
