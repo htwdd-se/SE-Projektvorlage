@@ -1,5 +1,5 @@
 // --- 1. Projektthema -------------------------
-= SE I - Belegabgabe: {project-name}
+= SE I - Projektdokumentation: {project-name}
 // --- 2. Teammitglieder -----------------------
 Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>
 // --- 3. Abgabedatum --------------------------

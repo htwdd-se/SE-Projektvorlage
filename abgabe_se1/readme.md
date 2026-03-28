@@ -1,24 +1,23 @@
-# Belegabgabe in SE I
+# Abgabe in SE I
 
-Im Verzeichnis **belegabgabe_se1** finden Sie die Vorlagedatei
-_se1_belegabgabe_t00.adoc_, welche alle Ihre erzeugten Dokumente für die Abgabe als PDF in <ins>ein</ins> Dokument bündelt.
+Im Verzeichnis **abgabe_se1** finden Sie die Vorlagedatei
+_se1_projektdokumentation_x0.adoc_, welche alle Ihre erzeugten Dokumente für die Abgabe als
+PDF in <ins>ein</ins> Dokument bündelt.
 
-Folgende Schritte sind für eine Belegabgabe durchzuführen:
+Folgende Schritte sind für eine Abgabe durchzuführen:
 
-1. Ändern Sie die Themennummer **t00** in der Vorlagedatei
-   _se1_belegabgabe_t00.adoc_ in Ihre Themennummer (A.1, A.2, B.1,
-   ...).
+1. Ändern Sie die Projek-ID **x0** in der Vorlagedatei
+   _se1_projektdokumentation_x0.adoc_ in Ihre Themennummer (a1, a2, b1, ...).
 2. Inhalt der Vorlagedatei anpassen:
-
    - Ist in Ihrem Projekt in der Datei
      _docs/\_includes/default-attributes.inc.adoc_ der Projektname im Attribut
-     `:project-name:` nicht gesetzt bzw. nutzen Sie eine andere Struktur, können
-     Sie im Dokumententitel nach dem `:` das `{project-name}` mit Ihrem
+     `:project-name:` nicht gesetzt bzw. nutzen Sie eine andere Struktur,
+     können Sie im Dokumententitel nach dem `:` das `{project-name}` mit Ihrem
      Projektthema ersetzen:
 
      ```asciidoc
      // --- 1. Projektthema -------------------------
-     = SE I - Belegabgabe: {project-name}
+     = SE I - Projektdokumentation: {project-name}
      ```
 
    - Tragen Sie **alle** Teammitglieder als Autoren ein:
@@ -57,31 +56,32 @@ Folgende Schritte sind für eine Belegabgabe durchzuführen:
      > und somit werden über die Zeilen 2 und 3 die jeweiligen Autoren und das
      > Versionsdatum nicht mit übernommen.
 
-3. Erzeugen Sie das Abgabe-PDF _*se1_belegabgabe_t00.pdf*_ ([Hinweise aus dem Praktikum](https://www.informatik.htw-dresden.de/~zirkelba/praktika/se/arbeiten-mit-git-und-asciidoc/praktikumsaufgaben-teil-02.html#_2_generieren_des_ausgabeformates)):
+3. Erzeugen Sie das Abgabe-PDF _*se1_projektdokumentation_x0.pdf*_ ([Hinweise aus dem
+   Praktikum](https://www.informatik.htw-dresden.de/~zirkelba/praktika/se/git-docs-collab/01-basics.html#_htmlpdf_generierung)):
 
    ```sh
-   asciidoctor-pdf se1_belegabgabe_t00.adoc
+   asciidoctor-pdf se1_projektdokumentation_x0.adoc
    ```
 
    ```sh
    # mit PlantUML
-   asciidoctor-pdf -r asciidoctor-diagram se1_belegabgabe_t00.adoc
+   asciidoctor-pdf -r asciidoctor-diagram se1_projektdokumentation_x0.adoc
    ```
 
    oder:
 
    ```sh
-   asciidoctor -r asciidoctor-pdf -b pdf se1_belegabgabe_t00.adoc
+   asciidoctor -r asciidoctor-pdf -b pdf se1_projektdokumentation_x0.adoc
    ```
 
    ```sh
    # mit PlantUML
-   asciidoctor -r asciidoctor-diagram -r asciidoctor-pdf -b pdf se1_belegabgabe_t00.adoc
+   asciidoctor -r asciidoctor-diagram -r asciidoctor-pdf -b pdf se1_projektdokumentation_x0.adoc
    ```
 
 4. Prüfen Sie, dass das korrekte **Projektthema**, alle **Teammitglieder** und
    das **Abgabedatum** auf dem Deckblatt stehen und dass ebenfalls alle
    erforderlichen **Dokumente** mit ihren Inhalten enthalten sind.
 
-5. Geben Sie das finale Abgabe-PDF _*se1_belegabgabe_t00.pdf*_ über den
+5. Geben Sie das finale Abgabe-PDF _*se1_projektdokumentation_x0.pdf*_ über den
    mitgeteilten Weg ab.
