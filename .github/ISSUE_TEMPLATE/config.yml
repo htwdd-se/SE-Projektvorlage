@@ -3,6 +3,14 @@ blank_issues_enabled: false
 # HINWEIS: Ersetze [ORG] und [REPO] durch den tatsächlichen GitHub-Organisationsnamen
 # und Repository-Namen, bevor dieses Projekt produktiv genutzt wird.
 # Beispiel: https://github.com/meine-hochschule/raumbuchung/blob/main/docs/...
+#
+# WARUM blank_issues_enabled: false?
+# Alle Issues müssen über ein Template erstellt werden. Das stellt sicher, dass
+# jede Aufgabe — inklusive Projektaufgaben und wiederkehrender Zeremonien — die
+# Mindestinformationen enthält, die für Planung und Nachverfolgung notwendig sind.
+# Auch einfache wiederkehrende Aufgaben wie "Sprint Review vorbereiten" werden
+# über das Projektaufgaben-Template angelegt — das dauert unter einer Minute
+# und hält den Issue Tracker konsistent.
 
 contact_links:
   - name: 📋 Produktkonzept
@@ -19,7 +27,7 @@ contact_links:
 
   - name: ✅ Team-Charta & Definition of Ready / Done
     url: https://github.com/[ORG]/[REPO]/blob/main/docs/team/team_charter.adoc
-    about: Unsere Arbeitsvereinbarungen — inkl. Definition of Ready und Definition of Done
+    about: Unsere Arbeitsvereinbarungen — inkl. Definition of Ready, Definition of Done und Zeremonien
 
   - name: 🏗️ Architekturdokument & ADRs
     url: https://github.com/[ORG]/[REPO]/blob/main/docs/technical/architecture.adoc
