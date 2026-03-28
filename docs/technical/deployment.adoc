@@ -10,21 +10,21 @@ include::../_includes/default-attributes.inc.adoc[]
 :toc-title: Inhalt
 :toclevels: 3
 
-_Dieses Dokument beschreibt, wie das System gebaut, ausgeliefert und betrieben wird —
+_Dieses Dokument beschreibt, wie das System gebaut, ausgeliefert und betrieben wird: 
 lokal, in der CI/CD-Pipeline und in den verschiedenen Umgebungen. Es richtet sich
-primär an Entwickler:innen und deckt alles ab, was nach dem Schreiben von Code passiert._
+primär an Entwickler:innen und deckt das ab, was nach dem Schreiben von Code passiert._
 
 _Technische Entscheidungen rund um Containerisierung und CI/CD (das *Warum*) sind
-als ADRs im Architekturdokument (`architecture.adoc`) dokumentiert.
+als ADRs im link:architecture.adoc[Architekturdokument] (`architecture.adoc`) dokumentiert.
 Dieses Dokument beschreibt das *Wie* und *Was*._
 
 ---
 
 == Umgebungsübersicht
 
-_Das System wird in mehreren Umgebungen betrieben, die unterschiedliche Zwecke haben.
-Jede Umgebung ist vollständig isoliert — eine Änderung in einer Umgebung beeinflusst
-keine andere._
+Das System wird in mehreren Umgebungen betrieben, die unterschiedliche Zwecke haben.
+Jede Umgebung ist vollständig isoliert. Eine Änderung in einer Umgebung beeinflusst
+keine andere.
 
 [cols="1,1,2,1,1", options="header"]
 |===
@@ -60,8 +60,8 @@ In diesem Fall dient Staging gleichzeitig als Produktionsumgebung.
 
 == Lokale Entwicklungsumgebung
 
-_Diese Anleitung richtet sich an neue Teammitglieder, die das System zum ersten
-Mal lokal zum Laufen bringen wollen._
+Diese Anleitung richtet sich an neue Teammitglieder, die das System zum ersten
+Mal lokal zum Laufen bringen wollen.
 
 === Voraussetzungen
 
@@ -145,8 +145,8 @@ docker compose down -v
 
 == Docker & Container
 
-_Dieser Abschnitt beschreibt, wie das System containerisiert ist — welche Container
-existieren, wie sie konfiguriert werden, und wie sie zusammenarbeiten._
+Dieser Abschnitt beschreibt, wie das System containerisiert ist, welche Container
+existieren, wie sie konfiguriert werden, und wie sie zusammenarbeiten.
 
 === Container-Übersicht
 
@@ -177,8 +177,8 @@ existieren, wie sie konfiguriert werden, und wie sie zusammenarbeiten._
 
 === Umgebungsvariablen
 
-_Alle Konfiguration erfolgt über Umgebungsvariablen — keine hartkodierten Werte
-im Code. Eine vollständige Liste mit Beispielwerten befindet sich in `.env.example`._
+Alle Konfiguration erfolgt über Umgebungsvariablen und *nicht* über feste Werte
+im Code. Eine vollständige Liste mit Beispielwerten befindet sich in `.env.example`.
 
 [cols="1,1,2,1", options="header"]
 |===
@@ -228,8 +228,8 @@ als CI/CD-Secrets oder über einen Secret-Manager verwaltet.
 
 == CI/CD-Pipeline
 
-_Die Pipeline automatisiert Qualitätsprüfung und Deployment. Sie stellt sicher,
-dass kein Code in `main` gelangt, der Tests bricht oder Qualitätsstandards verletzt._
+Die Pipeline automatisiert Qualitätsprüfung und Deployment. Sie stellt sicher,
+dass kein Code in `main` gelangt, der Tests bricht oder Qualitätsstandards verletzt.
 
 === Pipeline-Schritte im Detail
 
@@ -314,7 +314,7 @@ git push --tags
 # → GitHub → Actions → deploy.yml → "Run workflow" → Version bestätigen
 ----
 
-NOTE: Semantic Versioning: MAJOR.MINOR.PATCH —
+NOTE: Wir verwenden _Semantic Versioning_ mit dem Schema MAJOR.MINOR.PATCH: 
 MAJOR bei inkompatiblen Änderungen,
 MINOR bei neuen Features (abwärtskompatibel),
 PATCH bei Bugfixes.
@@ -342,8 +342,8 @@ Nach jedem Deployment werden folgende Prüfungen ausgeführt:
 
 == Rollback
 
-_Ein Rollback ist notwendig, wenn ein Deployment kritische Fehler in der
-Produktionsumgebung verursacht. Schnelles Handeln minimiert die Auswirkungen._
+Ein Rollback ist notwendig, wenn ein Deployment kritische Fehler in der
+Produktionsumgebung verursacht. Schnelles Handeln minimiert die Auswirkungen.
 
 === Wann wird ein Rollback durchgeführt?
 
@@ -374,8 +374,8 @@ docker compose up -d [service]
 
 == Monitoring & Logging
 
-_Dieser Abschnitt beschreibt, wie der Zustand des Systems beobachtet und wie
-Fehler diagnostiziert werden können._
+Dieser Abschnitt beschreibt, wie der Zustand des Systems beobachtet und wie
+Fehler diagnostiziert werden können.
 
 === Health Checks
 
@@ -418,7 +418,6 @@ Fehler diagnostiziert werden können._
 | Passwörter, Tokens, personenbezogene Daten (DSGVO-Anforderung)
 |===
 
----
 
 _Dieses Dokument ist ein lebendes Dokument. Änderungen an der Pipeline,
 den Umgebungen oder dem Deployment-Prozess sind hier im selben Pull Request

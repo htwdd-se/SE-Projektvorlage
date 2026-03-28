@@ -9,7 +9,7 @@ include::../_includes/default-attributes.inc.adoc[]
 
 *Was bauen wir, und warum?*
 
-[Hier die Produktvision und den Projektzweck in 2–3 Sätzen beschreiben.]
+_Hier die Produktvision und den Projektzweck in 2–3 Sätzen beschreiben._
 
 == Rollen
 
@@ -23,7 +23,7 @@ include::../_includes/default-attributes.inc.adoc[]
 | Scrum Master
 | [Name]
 
-| Tech Lead
+| Tech Lead footnote:[optionale Rolle, aber empfohlen, um technische Entscheidungen zu koordinieren]
 | [Name]
 
 | Entwickler:innen
@@ -33,11 +33,12 @@ include::../_includes/default-attributes.inc.adoc[]
 | [Name]
 |===
 
+
 == Meetings
 
 [cols="2,1,1,2", options="header"]
 |===
-| Zeremonie | Wann | Dauer | Moderation
+| Ereignis | Wann | Dauer | Moderation
 
 | Standup (Daily / Weekly)
 | [z. B. täglich 09:30]
@@ -72,10 +73,10 @@ include::../_includes/default-attributes.inc.adoc[]
 | Thema | Vereinbarung
 
 | Primärer Kanal
-| [z. B. Slack – #projektname]
+| [z. B. Discord – #projektname]
 
 | Entscheidungsprotokoll
-| [z. B. Confluence-Seite „Entscheidungen"]
+| [z. B. Wiki oder per Asciidoc in Ordner <Ordnername>]
 
 | Erwartete Reaktionszeit
 | [z. B. innerhalb von 4 Stunden während Kernzeit]
@@ -84,10 +85,10 @@ include::../_includes/default-attributes.inc.adoc[]
 | [z. B. 09:00 – 16:00 Uhr]
 
 | Videokonferenz-Tool
-| [z. B. Teams / Zoom / Google Meet]
+| [z. B. Teams / Discord / Google Meet]
 
 | Asynchrone Abstimmung
-| [z. B. kurze Statusupdates im Ticket-Kommentar]
+| [z. B. kurze Statusupdates im Issue-Diskussion]
 |===
 
 == Arbeitsweise
@@ -95,6 +96,7 @@ include::../_includes/default-attributes.inc.adoc[]
 === Definition of Ready (DoR)
 _Eine User Story ist bereit für die Entwicklung, wenn:_
 
+// Hier können die Kriterien individuell angepasst werden, z. B.:
 * [ ] Die Akzeptanzkriterien sind klar und vollständig beschrieben
 * [ ] Der Aufwand wurde vom Team geschätzt
 * [ ] Abhängigkeiten sind identifiziert und geklärt
@@ -104,6 +106,7 @@ _Eine User Story ist bereit für die Entwicklung, wenn:_
 === Definition of Done (DoD)
 _Eine User Story gilt als fertig, wenn:_
 
+// Hier können die Kriterien individuell angepasst werden, z. B.:
 * [ ] Der Code wurde implementiert und in den Hauptbranch gemergt
 * [ ] Unit- und Integrationstests wurden geschrieben und sind grün
 * [ ] Der Code wurde von mindestens einer weiteren Person reviewt

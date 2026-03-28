@@ -14,8 +14,8 @@ _Qualitätsziele und Einschränkungen sind im Produktkonzept als einziger Quelle
 Dieses Dokument referenziert sie und dokumentiert ausschließlich die technischen
 Konsequenzen, die sich daraus ergeben._
 
-_Detaillierte Beschreibungen der internen Softwarestruktur — Schichten, Komponenten,
-Datenmodell, Interaktionsflüsse — sind im link:design.adoc[Designdokument] beschrieben._
+_Detaillierte Beschreibungen der internen Softwarestruktur, z.B. Schichten, Komponenten,
+Datenmodell, Interaktionsflüsse, sind im link:design.adoc[Designdokument] (`design.adoc`)beschrieben._
 
 ---
 
@@ -26,27 +26,36 @@ _Der Systemkontext zeigt das System als Ganzes in seiner Umgebung: welche extern
 === Systemkontext
 //Level 1 im C4-Modell
 
-[plantuml, system-context, svg]
+[plantuml, "{diagramsdir}/system-context", svg]
 ....
 @startuml
-skinparam monochrome true
-skinparam defaultFontSize 13
-skinparam rectangleBorderThickness 2
+' source: https://github.com/plantuml-stdlib/C4-PlantUML
+' C4 Model
+!include <c4/C4_Context.puml>
 
-actor "Nutzer:in" as user
-actor "Administrator:in" as admin
+' Images
+!include <office/Users/user.puml>
+!include <office/Users/mobile_user.puml>
 
-rectangle "[Systemname]" as system #lightgray
+LAYOUT_WITH_LEGEND()
 
-database "Datenbank" as db
-rectangle "Externer Dienst\n[z. B. LDAP / SSO]" as ext1
-rectangle "Externer Dienst\n[z. B. E-Mail-Server]" as ext2
+title System Context Diagram – [Systemname]
 
-user --> system : nutzt (Web / Mobile)
-admin --> system : verwaltet
-system --> db : liest / schreibt
-system --> ext1 : Authentifizierung
-system --> ext2 : Benachrichtigungen
+Person(user, "Nutzer:in", "Verwendet das System über Web oder Mobile")
+Person(admin, "Administrator:in", "Verwaltet und konfiguriert das System")
+
+System(system, "[Systemname]", "Kernfunktionalität des Systems")
+
+SystemDb(db, "Datenbank", "Persistente Datenhaltung des Systems")
+
+System_Ext(ext1, "Externer Dienst\n[z. B. LDAP / SSO]", "Authentifizierung und Identitätsverwaltung")
+System_Ext(ext2, "Externer Dienst\n[z. B. E-Mail-Server]", "Versand von Benachrichtigungen")
+
+Rel(user, system, "nutzt", "Web / Mobile")
+Rel(admin, system, "verwaltet")
+Rel(system, db, "liest / schreibt", "JDBC / SQL")
+Rel(system, ext1, "authentifiziert über", "LDAP / OAuth2")
+Rel(system, ext2, "sendet Benachrichtigungen über", "SMTP")
 
 @enduml
 ....
@@ -84,6 +93,23 @@ Die interne Struktur des Systems ist im Designdokument beschrieben.
 === Laufzeitumgebungen (Container Diagramm)
 //Level 2 im C4-Modell
 Diese Sicht gibt an, welche Umgebungen für den Code vorgesehen sind, z.B. JVM, Node.js, DBMS, Browser, Android Runtime.
+
+[plantuml, "{diagramsdir}/system-context", svg]
+....
+@startuml
+' source: https://github.com/plantuml-stdlib/C4-PlantUML
+' C4 Model
+!include <c4/C4_Container.puml>
+
+Person(personAlias, "Label", "Optional Description")
+
+System_Boundary(c1, "Sample System") {
+    Container(containerAlias, "Container Name", "Technology", "Optional Description")
+}
+Rel(personAlias, containerAlias, "Label", "Optional Technology")
+
+@enduml
+....
 
 === Verteilungsdiagramm (Deployment Diagramm)
 //Beschreibt die physischen Knoten (Rechner) des Systems und Komponenten, die in diesen Knoten ausgeführt werden. 
@@ -174,8 +200,6 @@ diesen Anforderungen ergeben, und verweist auf die zugehörigen Entscheidungen.
 | [ADR-Referenz oder —]
 |===
 
----
-
 == Architekturentscheidungen
 
 _Architekturentscheidungen (Architecture Decision Records, ADRs) dokumentieren
@@ -216,8 +240,6 @@ NOTE: ADRs werden nicht gelöscht oder überschrieben — sie werden als
   Welche neuen Risiken entstehen?]
 |===
 
----
-
 === ADR-002: [Titel der Entscheidung]
 
 [cols="1,3"]
@@ -241,30 +263,6 @@ NOTE: ADRs werden nicht gelöscht oder überschrieben — sie werden als
 | [Konsequenzen]
 |===
 
----
-
-=== ADR-003: [Titel der Entscheidung]
-
-[cols="1,3"]
-|===
-| *Status*
-| [Vorgeschlagen \| Akzeptiert \| Abgelehnt \| Ersetzt durch ADR-XXX]
-
-| *Datum*
-| [Datum]
-
-| *Kontext*
-| [Kontext]
-
-| *Entscheidung*
-| [Entscheidung]
-
-| *Alternativen*
-| [Alternativen]
-
-| *Konsequenzen*
-| [Konsequenzen]
-|===
 
 NOTE: Weitere ADRs nach demselben Schema hinzufügen. Die Nummerierung ist
 fortlaufend und wird nie wiederverwendet.
@@ -313,5 +311,5 @@ Punkte in Vergessenheit geraten._
 
 | [Weitere technische Schuld]
 | [Begründung]
-| [Ticket-Referenz oder —]
+| [Ticket-Referenz oder "-"]
 |===

@@ -4,14 +4,12 @@ Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vor
 include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
-_Dieses Dokument beschreibt die interne Struktur des Systems — wie der Code organisiert ist,
+_Dieses Dokument beschreibt die interne Struktur des Systems, wie der Code organisiert ist,
 aus welchen Komponenten das System besteht, wie diese zusammenarbeiten, und welche
 Designmuster eingesetzt werden. Der Fokus liegt auf dem *Wie* der Implementierung._
 
 _Das Systemkontext-Diagramm und die Architekturentscheidungen (ADRs) sind im
-Architekturdokument (`architecture.adoc`) beschrieben. Dieses Dokument vertieft die interne Sicht._
-
-_Das Datenmodell hier beschreibt die technische Struktur der Persistenz. Die fachliche Bedeutung der Entitäten ist im Domänenmodell (`domain_glossary.adoc`) definiert._
+link:architecture.adoc[Architekturdokument] (`architecture.adoc`) beschrieben. Dieses Dokument vertieft die interne Sicht. Das Datenmodell hier beschreibt die technische Struktur der Persistenz. Die fachliche Bedeutung der Entitäten ist im link:domain_glossary.adoc[Domänenmodell] (`domain_glossary.adoc`) definiert._
 
 ---
 
@@ -91,42 +89,50 @@ zusammengehörige Einheit von Code mit einer klar definierten Aufgabe._
 
 === Komponentendiagramm
 
+//Beipielhaftes Komponentendiagramm, das die Hauptkomponenten und ihre Schnittstellen zeigt
+//Die tatsächlichen Komponenten müssen auf das konkrete Projekt zugeschnitten sein
 [plantuml, component-diagram, svg]
 ....
 @startuml
-skinparam monochrome true
-skinparam defaultFontSize 13
 
-package "Frontend" {
-  component "[z. B. Buchungskomponente]" as booking_ui
-  component "[z. B. Authentifizierungskomponente]" as auth_ui
-  component "[z. B. Gemeinsame UI-Komponenten]" as shared_ui
+' source: https://github.com/plantuml-stdlib/C4-PlantUML
+' C4 Model
+!include <c4/C4_Component.puml>
+
+LAYOUT_WITH_LEGEND()
+
+title Component Diagram – [Systemname]
+
+Container_Boundary(frontend, "Frontend") {
+  Component(booking_ui, "Buchungskomponente", "z. B. React / Angular", "Ermöglicht Nutzern das Erstellen und Verwalten von Buchungen")
+  Component(auth_ui, "Authentifizierungskomponente", "z. B. React / Angular", "Handhabt Login, Logout und Session-Management")
+  Component(shared_ui, "Gemeinsame UI-Komponenten", "z. B. Design System", "Wiederverwendbare UI-Elemente wie Buttons, Formulare, Navigation")
 }
 
-package "Backend" {
-  component "[z. B. Buchungs-Controller]" as booking_ctrl
-  component "[z. B. Buchungs-Service]" as booking_svc
-  component "[z. B. Nutzer-Service]" as user_svc
-  component "[z. B. Benachrichtigungs-Service]" as notification_svc
+Container_Boundary(backend, "Backend") {
+  Component(booking_ctrl, "Buchungs-Controller", "z. B. REST Controller", "Nimmt eingehende Buchungsanfragen entgegen und delegiert an den Service")
+  Component(booking_svc, "Buchungs-Service", "z. B. Spring Service", "Enthält die Buchungslogik und orchestriert Repository und Benachrichtigung")
+  Component(user_svc, "Nutzer-Service", "z. B. Spring Service", "Verwaltung von Nutzerdaten und Authentifizierungslogik")
+  Component(notification_svc, "Benachrichtigungs-Service", "z. B. Spring Service", "Erstellt und versendet Benachrichtigungen an Nutzer:innen")
 }
 
-package "Persistenz" {
-  component "[z. B. Buchungs-Repository]" as booking_repo
-  component "[z. B. Nutzer-Repository]" as user_repo
-  database "Datenbank" as db
+Container_Boundary(persistence, "Persistenz") {
+  Component(booking_repo, "Buchungs-Repository", "z. B. JPA Repository", "Datenzugriff für Buchungsentitäten")
+  Component(user_repo, "Nutzer-Repository", "z. B. JPA Repository", "Datenzugriff für Nutzerentitäten")
+  ContainerDb(db, "Datenbank", "z. B. PostgreSQL", "Persistente Datenhaltung für alle Entitäten")
 }
 
-rectangle "Externer Dienst\n[z. B. E-Mail]" as ext
+System_Ext(ext, "Externer E-Mail-Dienst", "Zustellung von E-Mail-Benachrichtigungen, z. B. via SMTP")
 
-booking_ui --> booking_ctrl : REST
-auth_ui --> user_svc : REST
-booking_ctrl --> booking_svc
-booking_svc --> booking_repo
-booking_svc --> notification_svc
-user_svc --> user_repo
-booking_repo --> db
-user_repo --> db
-notification_svc --> ext
+Rel(booking_ui, booking_ctrl, "sendet Buchungsanfragen", "REST / HTTPS")
+Rel(auth_ui, user_svc, "authentifiziert Nutzer:in", "REST / HTTPS")
+Rel(booking_ctrl, booking_svc, "delegiert an", "Java API")
+Rel(booking_svc, booking_repo, "liest / schreibt Buchungen", "JPA")
+Rel(booking_svc, notification_svc, "löst Benachrichtigung aus", "Java API")
+Rel(user_svc, user_repo, "liest / schreibt Nutzerdaten", "JPA")
+Rel(booking_repo, db, "persistiert Daten", "SQL")
+Rel(user_repo, db, "persistiert Daten", "SQL")
+Rel(notification_svc, ext, "sendet E-Mails über", "SMTP")
 
 @enduml
 ....
@@ -166,13 +172,16 @@ notification_svc --> ext
 
 == Wichtige Interaktionsflüsse
 
-_Sequenzdiagramme zeigen, wie Komponenten bei typischen Abläufen zusammenarbeiten.
+Sequenzdiagramme zeigen, wie Komponenten bei typischen Abläufen zusammenarbeiten.
 Dokumentiert werden hier nur die wichtigsten und komplexesten Flüsse —
-nicht jede einfache CRUD-Operation._
+nicht jede einfache CRUD-Operation.
 
 === [Flussname, z. B. Raum buchen]
 
 _Beschreibe kurz, was dieser Ablauf zeigt und warum er dokumentiert wird._
+
+//Beispielhaftes Sequenzdiagramm für den Buchungsprozess
+//Die tatsächlichen Flüsse müssen auf das konkrete Projekt zugeschnitten sein
 
 [plantuml, sequence-booking, svg]
 ....
@@ -239,7 +248,10 @@ Datentypen und Beziehungen. Er beantwortet die Frage: Wie werden die Daten gespe
 NOTE: Die *fachliche* Bedeutung der Entitäten — was sie repräsentieren und wie sie sich zueinander verhalten — ist im Domänenmodell (`domain_glossary.adoc`) beschrieben.
 Dieses Dokument zeigt ausschließlich die technische Persistenzstruktur.
 
-=== Datenbankdiagramm
+=== Datenbankmodell
+
+//beispielhaftes ER-Diagramm für das Datenmodell
+//Die tatsächlichen Tabellen und Spalten müssen auf das konkrete Projekt zugeschnitten sein
 
 [plantuml, data-model, svg]
 ....
@@ -397,9 +409,8 @@ Problem auf unterschiedliche Weise lösen._
 | JSON in allen Fällen; Datumsformat ISO 8601: `2024-06-01T09:00:00Z`
 
 | Versionierung
-| [z. B. URL-Präfix `/api/v1/` — Version nur erhöhen bei Breaking Changes]
+| [z. B. URL-Präfix `/api/v1/` - Version nur erhöhen bei Breaking Changes]
 |===
----
 
 _Diagramme in diesem Dokument sollten den aktuellen Stand des Codes widerspiegeln.
 Bei größeren Refactorings oder neuen Komponenten ist dieses Dokument im selben
