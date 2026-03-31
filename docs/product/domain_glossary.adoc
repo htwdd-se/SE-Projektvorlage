@@ -9,6 +9,41 @@ Alle Begriffe in User Stories, Personas und Gesprächen mit Stakeholdern sollten
 
 ---
 
+== Glossar
+
+Alle *fachlichen* Begriffe und Abkürzungen werden hier alphabetisch definiert.
+Ziel ist eine einheitliche Sprache im gesamten Team.
+Technische Implementierungsdetails gehören nicht hierher!
+
+[cols="1,3,2", options="header"]
+|===
+| Begriff / Abkürzung | Definition | Synonyme / Abgrenzungen
+
+| Bestellung
+| Eine vom Nutzer ausgelöste Anforderung, ein oder mehrere Produkte zu erwerben.
+  Eine Bestellung durchläuft verschiedene Status (offen, bezahlt, versendet, abgeschlossen).
+| Auftrag; nicht zu verwechseln mit „Warenkorb" (noch nicht abgeschlossen)
+
+| Nutzer
+| Eine Person, die das System aktiv verwendet. Nutzer müssen registriert und eingeloggt
+  sein, um Bestellungen aufzugeben.
+| Anwender, Benutzer; abzugrenzen von „Administrator"
+
+| Produkt
+| Ein im System angebotener Artikel, der bestellt werden kann. Ein Produkt hat eine
+  Bezeichnung, einen Preis und eine Verfügbarkeit.
+| Artikel, Ware
+
+| [Begriff]
+| [Präzise, fachliche Definition in 1–3 Sätzen]
+| [Synonyme oder Abgrenzungen zu ähnlichen Begriffen]
+
+| [Begriff]
+| [Präzise, fachliche Definition in 1–3 Sätzen]
+| [Synonyme oder Abgrenzungen zu ähnlichen Begriffen]
+|===
+
+
 == Domänenmodell
 
 _Das Domänenmodell zeigt die wichtigsten fachlichen Konzepte (Entitäten) und ihre Beziehungen.
@@ -91,40 +126,6 @@ Beschreibung der wichtigsten Beziehungen zwischen den Entitäten, sofern diese b
 | [Entität]
 | [z. B. 0..* zu 1]
 | [Beschreibung der Beziehung in natürlicher Sprache]
-|===
-
-== Glossar
-
-Alle *fachlichen* Begriffe und Abkürzungen werden hier alphabetisch definiert.
-Ziel ist eine einheitliche Sprache im gesamten Team.
-Technische Implementierungsdetails gehören nicht hierher!
-
-[cols="1,3,2", options="header"]
-|===
-| Begriff / Abkürzung | Definition | Synonyme / Abgrenzungen
-
-| Bestellung
-| Eine vom Nutzer ausgelöste Anforderung, ein oder mehrere Produkte zu erwerben.
-  Eine Bestellung durchläuft verschiedene Status (offen, bezahlt, versendet, abgeschlossen).
-| Auftrag; nicht zu verwechseln mit „Warenkorb" (noch nicht abgeschlossen)
-
-| Nutzer
-| Eine Person, die das System aktiv verwendet. Nutzer müssen registriert und eingeloggt
-  sein, um Bestellungen aufzugeben.
-| Anwender, Benutzer; abzugrenzen von „Administrator"
-
-| Produkt
-| Ein im System angebotener Artikel, der bestellt werden kann. Ein Produkt hat eine
-  Bezeichnung, einen Preis und eine Verfügbarkeit.
-| Artikel, Ware
-
-| [Begriff]
-| [Präzise, fachliche Definition in 1–3 Sätzen]
-| [Synonyme oder Abgrenzungen zu ähnlichen Begriffen]
-
-| [Begriff]
-| [Präzise, fachliche Definition in 1–3 Sätzen]
-| [Synonyme oder Abgrenzungen zu ähnlichen Begriffen]
 |===
 
 _Dieses Dokument wird kontinuierlich gepflegt. Änderungen an Fachbegriffen oder Beziehungen
