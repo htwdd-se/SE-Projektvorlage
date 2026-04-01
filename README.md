@@ -16,6 +16,7 @@ Software Engineering I und II benötigt. Im Detail sind das:
 - [Projektstruktur](#projektstruktur)
 - [Dokumentvorlagen](#dokumentvorlagen)
 - [Nutzung der AsciiDoc-Vorlagen](#nutzung-der-asciidoc-vorlagen)
+- [Repo-Links anpassen](#repo-links-anpassen)
 - [Lizenz](#lizenz)
 
 ## Projektstruktur
@@ -103,6 +104,14 @@ product
 ├── ...
 └── ux_concept.adoc
 ```
+
+## Repo-Links anpassen
+
+Bitte ersetzen Sie in den folgenden Dateien `[ORG]/[REPO]` durch den tatsächlichen Repository-Namen, bevor dieses Projekt produktiv genutzt wird.
+
+- `/.github/ISSUE_TEMPLATE/config.yml`
+- `/.github/ISSUE_TEMPLATE/user_story.md`
+- `/.github/ISSUE_TEMPLATE/technical_story.md`
 
 ## Lizenz
 
