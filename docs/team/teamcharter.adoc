@@ -4,6 +4,8 @@ Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vor
 include::../_includes/default-attributes.inc.adoc[]
 :version: 1.0
 
+== Über uns
+_Hier können Sie einen Teamnamen und ggf. ein Motto oder eine kurze Beschreibung hinzufügen, um die Identität Ihres Teams zu stärken._
 
 == Zweck
 
