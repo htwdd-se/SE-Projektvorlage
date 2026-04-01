@@ -16,8 +16,8 @@ Zwei Arten von Projektaufgaben:
   Einmalig — tritt unregelmäßig auf und wird bei Bedarf im Backlog erfasst.
   Beispiele:
     - Stakeholder-Präsentation vorbereiten
-    - Zwischenpräsentation für die Hochschule vorbereiten
-    - Projektabschlussbericht zusammenstellen
+    - Zwischenpräsentation vorbereiten
+    - Projektabschlussbericht anfertigen
     - Abnahme-Demo koordinieren und durchführen
 
   Wiederkehrend — entsteht jeden Sprint und wird vom Scrum Master direkt im
@@ -26,7 +26,7 @@ Zwei Arten von Projektaufgaben:
     - Sprint Retrospektive moderieren und dokumentieren
     - Sprint-Fortschritt im Board aktualisieren
 
-  Alternativ können wiederkehrende Aufgaben auch als Checkliste in der Teamcharta aufgeführt werden. Die dafür notwendige Zeit (Kapazität) muss pauschal bei jedem Sprint einkalkuliert werden.
+  Weniger aufwändig ist die Alternativ können wiederkehrende Aufgaben auch als Checkliste in der Teamcharta aufgeführt werden. Die dafür notwendige Zeit (Kapazität) muss pauschal bei jedem Sprint einkalkuliert werden.
 
 WICHTIG: Diese Aufgaben werden bei der Sprintkapazität berücksichtigt.
 Wer die Aufgabe übernimmt, steht für Feature-Entwicklung in diesem Sprint

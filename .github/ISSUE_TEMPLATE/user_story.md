@@ -12,8 +12,8 @@ Kommentare wie dieser sind im fertigen Issue nicht sichtbar.
 Lösche keine Abschnitte — auch wenn sie kurz bleiben.
 
 ABLAUF:
-  Refinement  → Story + Akzeptanzkriterien ausfüllen; Aufgaben-Checkliste gemeinsam skizzieren
-  Planning    → Checkliste finalisieren; Einträge als Sub-Issues anlegen und zuweisen
+  Refinement: Story + Akzeptanzkriterien ausfüllen; Aufgaben-Checkliste gemeinsam skizzieren
+  Planning: Checkliste finalisieren; Einträge als Sub-Issues anlegen und zuweisen
 -->
 
 ## User Story
@@ -38,7 +38,7 @@ nicht erfüllt bewertet werden können.
 
 Zwei Formate sind zulässig — wähle das, das besser zum Kriterium passt:
 
-  Interaktionen → Gegeben/Wenn/Dann:
+  Interaktionen: bevorzugt im Given/When/Then-Format:
     Gegeben [Ausgangszustand], wenn [Aktion], dann [erwartetes Ergebnis].
 
   Regeln, Constraints, Qualität → einfache testbare Aussage:
@@ -72,7 +72,7 @@ zulässig. Mindestens 2 Kriterien pro Story.
 ---
 
 > **Definition of Ready** prüfen, bevor diese Story in einen Sprint aufgenommen wird:
-> [Team-Charta → Definition of Ready](https://github.com/[ORG]/[REPO]/blob/main/docs/team/team_charter.adoc)
+> [Team-Charta - Definition of Ready](https://github.com/[ORG]/[REPO]/blob/main/docs/team/team_charter.adoc)
 
 ---
 

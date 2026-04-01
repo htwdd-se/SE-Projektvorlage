@@ -126,10 +126,9 @@ erklärt, warum bestimmte Entscheidungen getroffen wurden.
 
 == Hauptfunktionen
 
-Welche Kernfunktionen muss das Produkt bieten, um die Produktvision zu erfüllen? Jede Funktion ist direkt auf einen Nutzerbedarf zurückgeführt — nicht als technische
-Anforderung, sondern als Antwort auf ein Nutzungsproblem.
+Welche Kernfunktionen muss das Produkt bieten, um die Produktvision zu erfüllen? Jede Funktion ist direkt auf einen Nutzerbedarf zurückgeführt — nicht als technische Anforderung, sondern als Antwort auf ein Nutzungsproblem.
 
-Diese Hauptfunktionen sind Kandidaten für Epics im Product Backlog.
+Diese Hauptfunktionen sollten als Epics im Product Backlog für die Gruppierung von User Stories verwendet werden.
 
 [cols="2,2,1", options="header"]
 |===

@@ -13,20 +13,20 @@ Wert für das Projekt hat: Infrastruktur aufbauen, technische Schulden abbauen,
 Sicherheit verbessern, Dokumentation erstellen.
 
 Der Unterschied zu einer Entwicklungsaufgabe (Sub-Issue):
-  Technische Story  → steht eigenständig im Backlog; hat eigene Begründung und DoD
-  Entwicklungsaufgabe → ist ein Sub-Issue einer User Story oder Technischen Story
+  Technische Story: steht eigenständig im Backlog; hat eigene Begründung und DoD
+  Entwicklungsaufgabe: ist ein Sub-Issue einer User Story oder Technischen Story
 
 Typische Anwendungsfälle:
   - CI/CD-Pipeline aufbauen
   - Datenbankmigrationen einführen (Flyway / Liquibase)
   - Technische Schulden abbauen (Refactoring, veraltete Abhängigkeiten)
-  - Sicherheitslücken schließen
+  - Sicherheitslücken beseitigen
   - Performance-Engpässe beheben
   - Projektdokumentation erstellen oder aktualisieren
 
 ABLAUF:
-  Refinement  → Story + Akzeptanzkriterien ausfüllen; Aufgaben-Checkliste skizzieren
-  Planning    → Checkliste finalisieren; Einträge als Sub-Issues anlegen und zuweisen
+  Refinement: Beschreibung + Akzeptanzkriterien ausfüllen; Aufgaben-Checkliste skizzieren
+  Planning: Checkliste finalisieren; Einträge als Sub-Issues anlegen und zuweisen
 -->
 
 ## Beschreibung
@@ -66,11 +66,11 @@ Produktkonzept, falls zutreffend.]
 
 <!--
 Wie bei User Stories: konkret und testbar.
-Für technische Arbeit sind oft einfache testbare Aussagen passender als Gegeben/Wenn/Dann.
+Für technische Arbeit sind oft einfache testbare Aussagen passender als das Given/When/Then-Format.
 Mindestens 2 Kriterien.
 -->
 
-- [ ] [z. B. „CI-Pipeline läuft grün bei jedem Push auf main."]
+- [ ] [z. B. „CI-Pipeline ist grün bei jedem Push auf main."]
 - [ ] [z. B. „Alle bestehenden Tests bestehen nach dem Refactoring."]
 - [ ] [z. B. „Technische Änderung ist in `architecture.adoc` oder `design.adoc` dokumentiert."]
 - [ ] [Weiteres Kriterium]
@@ -80,7 +80,7 @@ Mindestens 2 Kriterien.
 ## Aufgaben-Checkliste
 
 <!--
-REFINEMENT: Gemeinsam vom Team erarbeitet — welche Entwicklungsaufgaben sind nötig?
+REFINEMENT: Gemeinsam vom Team erarbeitet — welche Entwicklungsaufgaben sind ötig?
 PLANNING: Einträge als Sub-Issues anlegen und zuweisen.
 -->
 
@@ -93,4 +93,4 @@ PLANNING: Einträge als Sub-Issues anlegen und zuweisen.
 ---
 
 > **Definition of Ready** prüfen, bevor diese Story in einen Sprint aufgenommen wird:
-> [Team-Charta → Definition of Ready](https://github.com/[ORG]/[REPO]/blob/main/docs/team/team_charter.adoc)
+> [Team-Charta - Definition of Ready](https://github.com/[ORG]/[REPO]/blob/main/docs/team/team_charter.adoc)

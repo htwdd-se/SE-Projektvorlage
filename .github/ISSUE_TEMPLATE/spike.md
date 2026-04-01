@@ -16,8 +16,7 @@ Ein Spike ist KEIN:
   - Ersatz für eine User Story oder Technische Story
   - Endloser Rechercheprozess
 
-Ein Spike wird einer Person oder einem Paar zugewiesen — nicht dem ganzen Team.
-Untersuchungen lassen sich nicht sinnvoll parallelisieren.
+Ein Spike wird einer Person oder zwei Personen, die zusammenarbeiten, zugewiesen — nicht dem ganzen Team. Untersuchungen lassen sich nicht sinnvoll parallelisieren.
 
 Zwei Arten von Spikes sind möglich (siehe Feld "Art" unten):
 
