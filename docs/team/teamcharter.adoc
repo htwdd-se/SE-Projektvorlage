@@ -78,7 +78,7 @@ _Hier die Produktvision und den Projektzweck in 2–3 Sätzen beschreiben._
 | [z. B. Discord – #projektname]
 
 | Entscheidungsprotokoll
-| [z. B. Wiki oder per Asciidoc in Ordner <Ordnername>]
+| [z. B. Wiki oder per AsciiDoc in Ordner <Ordnername>]
 
 | Erwartete Reaktionszeit
 | [z. B. innerhalb von 4 Stunden während Kernzeit]
