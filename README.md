@@ -89,7 +89,7 @@ image::example.jpg[Beispielbild]
 ```
 
 In dem Dokumentenattribut `:plantumlsdir: plantuml` ist das Standardverzeichnis
-**plantuml** für die Diagramme in plantUML-Notation festgelegt. Im
+**plantuml** für die Diagramme in PlantUML-Notation festgelegt. Im
 Dokumentenattribut `:diagramsdir: diagrams` ist das Verzeichnis für die
 generierten Diagramme angegeben, welches unter dem `:imagesdir:` angelegt wird.
 
@@ -107,7 +107,8 @@ product
 
 ## Repo-Links anpassen
 
-Bitte ersetzen Sie in den folgenden Dateien `[ORG]/[REPO]` durch den tatsächlichen Repository-Namen, bevor dieses Projekt produktiv genutzt wird.
+Bitte ersetzen Sie in den folgenden Dateien `[ORG]/[REPO]` durch den
+tatsächlichen Repository-Namen, bevor dieses Projekt produktiv genutzt wird.
 
 - `/.github/ISSUE_TEMPLATE/config.yml`
 - `/.github/ISSUE_TEMPLATE/user_story.md`
