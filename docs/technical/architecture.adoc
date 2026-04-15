@@ -94,7 +94,7 @@ Die interne Struktur des Systems ist im Designdokument beschrieben.
 //Level 2 im C4-Modell
 Diese Sicht gibt an, welche Umgebungen für den Code vorgesehen sind, z.B. JVM, Node.js, DBMS, Browser, Android Runtime.
 
-[plantuml, "{diagramsdir}/system-context", svg]
+[plantuml, "{diagramsdir}/runtime-environment", svg]
 ....
 @startuml
 ' source: https://github.com/plantuml-stdlib/C4-PlantUML
@@ -112,7 +112,7 @@ Rel(personAlias, containerAlias, "Label", "Optional Technology")
 ....
 
 === Verteilungsdiagramm (Deployment Diagramm)
-//Beschreibt die physischen Knoten (Rechner) des Systems und Komponenten, die in diesen Knoten ausgeführt werden. 
+//Beschreibt die physischen Knoten (Rechner) des Systems und Komponenten, die in diesen Knoten ausgeführt werden.
 
 
 == Technologie-Stack
