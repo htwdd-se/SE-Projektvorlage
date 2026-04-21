@@ -31,8 +31,6 @@ _Hier die Produktvision und den Projektzweck in 2–3 Sätzen beschreiben._
 | Entwickler:innen
 | [Namen]
 
-| Stakeholder (Hauptansprechpartner)
-| [Name]
 |===
 
 
