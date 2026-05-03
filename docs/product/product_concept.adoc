@@ -61,14 +61,15 @@ _Wer sind die Zielgruppen, und wie positioniert sich das Produkt im Vergleich zu
 |===
 | Zielgruppe | Beschreibung
 
-| [z. B. Studierende]
-| [Kurzbeschreibung: Wer sind sie? Was ist ihre Motivation?]
+| WG-Bewohner:innen
+| Hauptnutzer:innen der Anwendung. Sie möchten Aufgaben im Haushalt fair verteilen, Überblick behalten und Konflikte vermeiden.
 
-| [z. B. Lehrende]
-| [Kurzbeschreibung]
+| WG-Bewohner:innen (Berufstätige)
+| Berufstätige Personen, die in einer WG leben. Sie haben oft feste Arbeitszeiten und wenig Zeit für Organisation, daher benötigen sie eine effiziente und verlässliche Aufgabenkoordination.
 
-| [Weitere Zielgruppe]
-| [Kurzbeschreibung]
+| WG-Neugründer:innen
+| Personen, die eine neue WG organisieren. Sie benötigen eine einfache Struktur zur Aufgabenverteilung von Anfang an.
+
 |===
 
 NOTE: Ausführliche Beschreibungen der Nutzenden — Personas, Nutzungskontext,
@@ -80,17 +81,17 @@ typische Aufgaben — sind im link:ux_concept.adoc[UX-Konzept] dokumentiert.
 |===
 | Alternative | Beschreibung | Warum unser Produkt besser passt
 
-| [z. B. E-Mail-Anfrage an Sekretariat]
-| [Wie lösen Nutzer:innen das Problem heute?]
-| [Worin liegt unser Vorteil?]
+| Allgemeine To-Do-Apps (z. B. Todoist)
+| Individuelle Aufgabenverwaltung ohne Fokus auf WG-Kollaboration.
+| TaskHive ist speziell auf Gruppenorganisation und faire Aufgabenverteilung ausgelegt.
 
-| [z. B. Aushang an schwarzem Brett]
-| [Beschreibung]
-| [Unterschied]
+| Messenger (WhatsApp, Telegram)
+| Aufgaben werden informell im Chat verteilt und gehen oft verloren.
+| TaskHive bietet strukturierte Aufgaben, klare Zuständigkeiten und Nachverfolgbarkeit.
 
-| [Weitere Alternative]
-| [Beschreibung]
-| [Unterschied]
+| Papier-Putzplan
+| Statische Aufgabenverteilung ohne Flexibilität oder Anpassung.
+| TaskHive ermöglicht dynamische Rotationen und berücksichtigt individuelle Präferenzen.
 |===
 
 
@@ -103,25 +104,25 @@ erklärt, warum bestimmte Entscheidungen getroffen wurden.
 |===
 | Stakeholder | Rolle / Interesse | Erwartungen an das Produkt | Einfluss
 
-| [z. B. Hochschulverwaltung]
-| [Betreiber der Infrastruktur; will Raumauslastung optimieren]
-| [Auslastungsberichte, DSGVO-Konformität]
+| Product Owner
+| Verantwortlich für Produktvision und Priorisierung.
+| Klar definierte Anforderungen und Fortschritt.
 | Hoch
 
-| [z. B. Studierende]
-| [Hauptnutzer:innen; wollen schnell freie Plätze finden]
-| [Einfache Bedienung, mobiler Zugang]
+| Entwicklerteam
+| Setzt das Produkt technisch um.
+| Klare Anforderungen und stabile Rahmenbedingungen.
+| Hoch
+
+| Designer:innen
+| Verantwortlich für UX und Usability.
+| Intuitive und motivierende Benutzeroberfläche.
 | Mittel
 
-| [z. B. Lehrende]
-| [Nutzen Räume für Lehrveranstaltungen; wollen Konflikte vermeiden]
-| [Sichtbarkeit ihrer Buchungen]
-| Mittel
-
-| [Weiterer Stakeholder]
-| [Beschreibung]
-| [Erwartungen]
-| [Hoch / Mittel / Niedrig]
+| WG-Bewohner:innen
+| Hauptnutzer:innen der Anwendung.
+| Einfache Bedienung, faire Aufgabenverteilung, Transparenz.
+| Hoch
 |===
 
 == Hauptfunktionen
