@@ -253,6 +253,8 @@ Dieses Dokument zeigt ausschließlich die technische Persistenzstruktur.
 //beispielhaftes ER-Diagramm für das Datenmodell
 //Die tatsächlichen Tabellen und Spalten müssen auf das konkrete Projekt zugeschnitten sein
 
+//Sollten Sie mit einem ORM-Framework arbeiten, kann auch ein UML-Klassendiagramm verwendet werden, um die Datenbankstruktur zu dokumentieren.
+
 [plantuml, data-model, svg]
 ....
 @startuml

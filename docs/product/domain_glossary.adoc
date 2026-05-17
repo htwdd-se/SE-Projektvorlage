@@ -12,7 +12,7 @@ Alle Begriffe in User Stories, Personas und Gesprächen mit Stakeholdern sollten
 == Domänenmodell
 
 _Das Domänenmodell zeigt die wichtigsten fachlichen Konzepte (Entitäten) und ihre Beziehungen.
-Es beschreibt die Realität des Problemraums, nicht die Datenbankstruktur._
+Es beschreibt die Realität des Problemraums, nicht die Datenbankstruktur. Für Klassen, die zeitnah implementiert werden sollen, können Attribute und Datentypen definiert werden. Somit entsteht ein partielles logisches Datenmodell._
 
 === Diagramm
 
@@ -23,24 +23,26 @@ Es beschreibt die Realität des Problemraums, nicht die Datenbankstruktur._
 @startuml
 ' Beispiel — bitte durch das echte Domänenmodell ersetzen
 
-entity Nutzer {
-  Name
-  E-Mail
+left to right direction
+hide empty members
+
+class Nutzer {
+
 }
 
-entity Bestellung {
+class Bestellung {
   Bestellnummer
   Datum
   Status
 }
 
-entity Produkt {
+class Produkt {
   Bezeichnung
   Preis
 }
 
-Nutzer "1" --> "0..*" Bestellung : gibt auf
-Bestellung "1" --> "1..*" Produkt : enthält
+Nutzer "1" -- "0..*" Bestellung : gibt auf
+Bestellung "1" -- "1..*" Produkt : enthält
 
 @enduml
 ....
