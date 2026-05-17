@@ -50,22 +50,6 @@ für einen gegebenen Zeitraum zurückgibt. Parameter: `von`, `bis` als ISO-8601-
 
 ---
 
-## Bereich
-
-<!--
-Genau eine Option auswählen — erleichtert die Übersicht auf dem Sprint Board.
--->
-
-- [ ] Backend
-- [ ] Frontend
-- [ ] Datenbank / Migration
-- [ ] Testing
-- [ ] Dokumentation
-- [ ] DevOps / Infrastruktur
-- [ ] Sonstiges: [beschreiben]
-
----
-
 ## Fertigstellungskriterium
 
 <!--

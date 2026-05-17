@@ -4,6 +4,8 @@ Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vor
 include::../_includes/default-attributes.inc.adoc[]
 :version: 1.0
 
+== Über uns
+_Hier können Sie einen Teamnamen und ggf. ein Motto oder eine kurze Beschreibung hinzufügen, um die Identität Ihres Teams zu stärken._
 
 == Zweck
 
@@ -29,8 +31,6 @@ _Hier die Produktvision und den Projektzweck in 2–3 Sätzen beschreiben._
 | Entwickler:innen
 | [Namen]
 
-| Stakeholder (Hauptansprechpartner)
-| [Name]
 |===
 
 
@@ -76,7 +76,7 @@ _Hier die Produktvision und den Projektzweck in 2–3 Sätzen beschreiben._
 | [z. B. Discord – #projektname]
 
 | Entscheidungsprotokoll
-| [z. B. Wiki oder per Asciidoc in Ordner <Ordnername>]
+| [z. B. Wiki oder per AsciiDoc in Ordner <Ordnername>]
 
 | Erwartete Reaktionszeit
 | [z. B. innerhalb von 4 Stunden während Kernzeit]
